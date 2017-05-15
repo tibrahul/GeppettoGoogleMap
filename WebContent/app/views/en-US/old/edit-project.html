@@ -1,0 +1,672 @@
+<section class="section-bg1" data-ng-controller="ProjectController">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2 class="title-block">Manage Project</h2>
+				<div role="tabpanel">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" id="tabs" role="tablist" data-tabs="tabs">
+						<li role="presentation" class="active"><a
+							data-target="#project1" aria-controls="project1" role="tab"
+							data-toggle="tab" aria-expanded="false"> General Information
+						</a></li>
+						<li role="presentation"><a data-target="#project2"
+							aria-controls="project2" role="tab" data-toggle="tab"
+							aria-expanded="true"> Activity Design </a></li>
+						<li role="presentation"><a data-target="#project3"
+							aria-controls="project3" role="tab" data-toggle="tab"
+							aria-expanded="true"> Noun Design </a></li>
+
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="project1">
+							<form class="form-horizontal adv-project-form" id="" action="">
+								<div class="row">
+									<div class="col-xs-12 col-sm-12 col-md-4">
+										<label class="control-label" for="inputEmail3">Project
+											Name</label>
+										<p>
+											<input type="text" placeholder="" id="" class="form-control"
+												data-ng-model="projectName">
+										</p>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-4">
+										<label class="control-label" for="inputEmail3">Project
+											Label</label>
+										<p>
+											<input type="text" placeholder="" id="" class="form-control"
+												data-ng-model="projectLabel">
+										</p>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-4">
+										<label class="control-label" for="inputEmail3">Entity
+											/ Company</label>
+										<p>
+											<input type="text" placeholder="" id="" class="form-control"
+												data-ng-model="projectCompany">
+										</p>
+									</div>
+
+								</div>
+								<div class="row">
+
+									<div class="col-xs-12 col-sm-12 col-md-4">
+										<label class="control-label" for="inputEmail3">Project
+											Languages</label>
+										<p>
+											<select data-ng-model="mainLanguage" class="form-control"
+												data-ng-options="opt.name for opt in mainLanguages track by opt.id">
+												<option>Default Language</option>
+											</select>
+										</p>
+										<p>
+											<select id="additional-language" multiple="multiple"
+												class="tokenize-sample">
+											</select>
+										</p>
+
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-4">
+										<label class="control-label" for="inputEmail3">Description</label>
+										<p>
+											<input type="text" placeholder="" id="" class="form-control"
+												data-ng-model="projectDescription">
+										</p>
+									</div>
+
+
+									<div class="col-xs-12 col-sm-12 col-md-4">
+										<label class="control-label" for="inputEmail3">Project
+											Type</label>
+										<p class="tech-checkbox">
+											<input id="check1" type="checkbox" name="check"
+												value="check1">&nbsp;&nbsp;&nbsp; <label
+												for="check1">Desktop / Laptop</label> <input id="check2"
+												type="checkbox" name="check" value="check2">&nbsp;&nbsp;&nbsp;
+											<label for="check2">Mobile</label>
+										</p>
+									</div>
+								</div>
+								<div class="row">
+									<!--                   	<div class="col-xs-12 col-sm-12 col-md-4">
+                      	<label class="control-label" for="inputEmail3">Enforce Documentation</label>
+                        <p class="tech-radio">
+                            <input id="Enforce" type="radio" name="Enforce-doc" value="Enforce">
+                            <label for="Enforce">Yes</label>
+                            <input id="Enforce1" type="radio" name="Enforce-doc" value="Enforce1">
+                            <label for="Enforce1">No</label>
+                        </p>
+                      </div>
+ -->
+									<div class="col-xs-12 col-sm-12 col-md-4">&nbsp;</div>
+									<div class="col-xs-12 col-sm-12 col-md-4">&nbsp;</div>
+								</div>
+								<div class="action-group  button-group">
+									<a class="btn btn-info" href="">Generate</a>
+									<!-- <a
+										class="btn btn-info" href="" ng-click="createActivity()">Create
+										Activity</a> -->
+									<a class="btn btn-info" href="" data-toggle="modal"
+										data-target="#add-acti">Create Activity</a> <a
+										class="btn btn-info" href="" data-toggle="modal"
+										data-target="#add-noun">Create Noun</a>
+								</div>
+							</form>
+							<div class="clearfix">&nbsp;</div>
+
+							<div class="panel-group accordion" id="accordion" role="tablist"
+								aria-multiselectable="true">
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="headingOne">
+										<h4 class="panel-title  accordion-heading">
+											<a data-toggle="collapse" class="accordion-toggle"
+												data-parent="#accordion" data-target="#nouns"
+												aria-expanded="true" aria-controls="nouns"> Technical
+												Architecture </a>
+										</h4>
+									</div>
+									<div id="nouns" class="panel-collapse collapse in"
+										role="tabpanel" aria-labelledby="headingOne">
+										<div class="panel-body">
+											<form class="form-horizontal tech-arch-form" id="" action="">
+												<div class="row">
+													<div class="col-xs-6 col-md-4">
+														<h3>Client Properties</h3>
+														<div class="row">
+															<div class="col-xs-12 col-xs-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Client
+																	Development Languages:</label>
+																<p>
+																	<select id="dev-languages" multiple="multiple"></select>
+																</p>
+															</div>
+
+															<div class="col-xs-12 col-xs-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Client
+																	Development Frameworks</label>
+																<p>
+																	<select id="dev-frameworks"></select>
+																</p>
+															</div>
+															<!--                                       <div class="col-xs-12 col-xs-12 col-md-12">
+                                      	<label class="control-label" for="inputEmail3">Client Runtime Environment</label>
+                                        <p>
+                                            <select id="tokenize" multiple="multiple" class="tokenize-sample">
+                                                <option value="1">Dave</option>
+                                                <option value="2">Paul</option>
+                                                <option value="3">Michel</option>
+                                                <option value="4">Anna</option>
+                                                <option value="5">Eleanor</option>
+                                            </select>
+                                        </p>
+                                      </div>
+ -->
+															<div class="col-xs-12 col-xs-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Client
+																	OS</label>
+																<p>
+																	<select id="os-type" multiple="multiple"></select>
+																</p>
+															</div>
+
+															<div class="col-xs-12 col-xs-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Device
+																	Types</label>
+																<p>
+																	<select id="device-type"></select>
+																</p>
+															</div>
+
+															<div class="col-xs-12 col-xs-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Supported
+																	Browsers</label>
+																<p>
+																	<select id="supported-browsers" multiple="multiple"></select>
+																</p>
+															</div>
+
+															<!--                                       <div class="col-xs-12 col-xs-12 col-md-6">
+                                      	<label class="control-label" for="inputEmail3">Client Development Libraries</label>
+                                        <p>
+                                            <select class="form-control">
+                                               <option name="" value="">Desktop,Mobile..</option>
+                                            </select>
+                                        </p>
+                                      </div>
+                                      <div class="col-xs-12 col-xs-12 col-md-6">
+                                      	<label class="control-label" for="inputEmail3">Desktop / Laptop Only</label>
+                                        <p>
+                                            <select class="form-control">
+                                               <option name="" value="">UI Navigation Type..</option>
+                                            </select>
+                                        </p>
+                                      </div>
+ -->
+															<div class="col-xs-12 col-xs-12 col-md-6">
+																<label class="control-label" for="inputEmail3">Mobile
+																	Only</label>
+																<h4>Stand Alone App</h4>
+																<p class="tech-radio">
+																	<input id="appyes" type="radio" name="Aloneapp"
+																		value="appyes"> <label for="appyes">Yes</label>
+																	<input id="appno" type="radio" name="Aloneapp"
+																		value="appno"> <label for="appno">No</label>
+																</p>
+															</div>
+														</div>
+													</div>
+													<div class="col-xs-6 col-md-4">
+														<h3>Server Properties</h3>
+														<div class="row">
+															<div class="col-xs-12 col-xs-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Server
+																	Runtime Environment</label>
+																<p>
+																	<select data-ng-model="serverRunTime"
+																		data-ng-options="opt.name for opt in serverRunTimes track by opt.id"></select>
+																</p>
+															</div>
+
+															<div class="col-xs-12 col-xs-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Server
+																	OS</label>
+																<p>
+																	<select data-ng-model="serverOs"
+																		data-ng-options="opt.name for opt in serverOS track by opt.id"></select>
+																</p>
+															</div>
+
+															<div class="col-xs-12 col-xs-12 col-md-6">
+																<label class="control-label" for="inputEmail3">Server
+																	Development Language</label>
+																<p>
+																	<select data-ng-model="serverDevelopmentLanguage"
+																		data-ng-options="opt.name for opt in serverLanguages track by opt.id">
+																	</select>
+																</p>
+															</div>
+
+															<div class="col-xs-12 col-xs-12 col-md-6">
+																<label class="control-label" for="inputEmail3">Data
+																	Base</label>
+																<p>
+																	<select data-ng-model="serverDbms"
+																		data-ng-options="opt.name for opt in serverDBMS track by opt.id"></select>
+																</p>
+															</div>
+
+															<div class="col-xs-12 col-xs-12 col-md-6">
+																<label class="control-label" for="inputEmail3">Server
+																	Development Frame</label>
+																<p>
+																	<select data-ng-model="serverDevelopmentFramework"
+																		data-ng-options="opt.name for opt in serverDevFramework track by opt.id">
+																	</select>
+																</p>
+															</div>
+
+															<div class="col-xs-12 col-xs-12 col-md-6">&nbsp;</div>
+														</div>
+													</div>
+													<div class="col-xs-6 col-md-4">
+														<h3>Miscelleneous</h3>
+														<div class="row">
+															<div class="col-xs-12 col-xs-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Communication
+																	Protocal</label>
+																<p class="tech-radio">
+																	<input id="sec" type="radio" name="Protocal"
+																		value="sec"> <label for="sec">Secured</label>
+																	<input id="non-sec" type="radio" name="Protocal"
+																		value="non-sec"> <label for="non-sec">Non-Secured</label>
+																</p>
+															</div>
+															<div class="col-xs-12 col-sm-12 col-md-12">
+																<label class="control-label" for="inputEmail3">Default
+																	Module Labels</label>
+																<p>
+																	<input type="text" placeholder="Type Here..." id=""
+																		class="form-control">
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="headingTwo">
+										<h4 class="panel-title accordion-heading">
+											<a class="collapsed accordion-toggle" data-toggle="collapse"
+												data-parent="#accordion" data-target="#screens"
+												aria-expanded="false" aria-controls="screens">
+												Documentation </a>
+										</h4>
+									</div>
+									<div id="screens" class="panel-collapse collapse"
+										role="tabpanel" aria-labelledby="headingTwo">
+										<div class="panel-body">
+											<textarea data-ng-model="projectNotes" data-ck-editor></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="action-group  button-group">
+								<a href="" data-ng-click="updateProject()" data-toggle="modal"
+									data-target="#update-project" class="btn btn-success">Save</a>
+								<a href="" data-toggle="modal" ng-click="openDeleteDialog()"
+									class="btn btn-danger">Delete</a> <a href=""
+									data-ng-click="cancelProject()" class="btn btn-info">Cancel</a>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="project2">
+							<div class="box-wrapper">
+								<div class="add-project col-sm-12">
+									<a data-toggle="modal" data-target="#add-acti"
+										class="btn btn-primary pull-right"> <i class="fa fa-plus"></i>
+										Create Activity
+									</a>
+								</div>
+								<div class="box-wrapper">
+									<ul>
+										<li data-ng-repeat="object in activities" id="{{object.id}}">
+											<div class="col-xs-12 col-sm-12 col-md-4">
+												<div id="managae-act">
+													<h1>{{object.name}}</h1>
+													<div class="manage-cont">
+														<h4>{{object.label}}</h4>
+														<p>{{object.decription}}</p>
+														<div class="clearfix"></div>
+													</div>
+													<div class="btn-manag">
+														<a href="" class="btn btn-success"
+															ng-click="updateActivity(object.id)"> <i
+															class="fa fa-edit"></i>Edit
+														</a> <a href="" data-toggle="modal"
+															ng-click="setDeleteActivityObj(object)"
+															data-target="#delete-activity" class="btn btn-danger">
+															<i class="fa fa-trash"></i>Delete
+														</a>
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="col-lg-12 col-md-12">
+									<ul class="pagination">
+										<li class="disabled"><a aria-label="Previous" href="#"><span
+												aria-hidden="true">�</span></a></li>
+										<li class="active"><a href="#">1 <span
+												class="sr-only">(current)</span></a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">4</a></li>
+										<li><a href="#">5</a></li>
+										<li><a aria-label="Next" href="#"><span
+												aria-hidden="true">�</span></a></li>
+									</ul>
+								</div>
+
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<div role="tabpanel" class="tab-pane" id="project3">
+							<div class="box-wrapper">
+								<div class="add-project col-sm-12">
+									<a data-toggle="modal" data-target="#add-noun"
+										class="btn btn-primary pull-right"> <i class="fa fa-plus"></i>
+										Create Noun
+									</a>
+								</div>
+								<div class="box-wrapper">
+									<ul>
+										<li data-ng-repeat="object in nouns" id="{{object.id}}">
+											<div class="col-xs-12 col-sm-12 col-md-4">
+												<div id="managae-act">
+													<h1>{{object.name}}</h1>
+													<div class="manage-cont">
+														<h4>{{object.label}}</h4>
+														<p>{{object.decription}}</p>
+														<div class="clearfix"></div>
+													</div>
+													<div class="btn-manag">
+														<a href="" class="btn btn-success" ng-click="updateNoun(object)">
+															<i class="fa fa-edit"></i>Edit
+														</a> <a href="" data-toggle="modal"
+															ng-click="setDeleteNounObj(object)"
+															data-target="#delete-noun" class="btn btn-danger"> <i
+															class="fa fa-trash"></i>Delete
+														</a>
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="col-lg-12 col-md-12">
+									<ul class="pagination">
+										<li class="disabled"><a aria-label="Previous" href="#"><span
+												aria-hidden="true">�</span></a></li>
+										<li class="active"><a href="#">1 <span
+												class="sr-only">(current)</span></a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">4</a></li>
+										<li><a href="#">5</a></li>
+										<li><a aria-label="Next" href="#"><span
+												aria-hidden="true">�</span></a></li>
+									</ul>
+								</div>
+
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Activity popup Start-->
+	<div id="add-acti" class="modal  fade">
+		<div class="modal-dialog  modal-sm">
+			<div class="modal-content  modal-sm">
+				<div class="modal-header theme-bg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Add Activity</h4>
+				</div>
+				<div class="modal-body modal-sm">
+					<form class="form-horizontal">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12">
+								<label for="" class="control-label">Activity Name :</label>
+								<p>
+									<input type="text" class="form-control" id=""
+										placeholder="Activity Name" ng-model="activity.name">
+								</p>
+								<label for="" class="control-label">Activity Label :</label>
+								<p>
+									<input type="text" class="form-control" id=""
+										placeholder="Activity Label" ng-model="activity.label">
+								</p>
+								<label for="inputPassword3" class="control-label">Description
+									:</label>
+								<p>
+									<textarea class="form-control" rows="3"
+										ng-model="activity.description" placeholder="Description"></textarea>
+								</p>
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+					<a href="" class="btn btn-success" ng-click="createActivityNow()">Save</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Noun popup Start-->
+	<div id="add-noun" class="modal  fade">
+		<div class="modal-dialog  modal-sm">
+			<div class="modal-content  modal-sm">
+				<div class="modal-header theme-bg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Add Noun</h4>
+				</div>
+				<div class="modal-body modal-sm">
+					<form class="form-horizontal">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12">
+								<label for="" class="control-label">Noun Name :</label>
+								<p>
+									<input type="text" class="form-control" id=""
+										placeholder="Noun Name" ng-model="noun.name">
+								</p>
+								<label for="" class="control-label">Noun Label :</label>
+								<p>
+									<input type="text" class="form-control" id=""
+										placeholder="Noun Label" ng-model="noun.label">
+								</p>
+								<label for="inputPassword3" class="control-label">Description
+									:</label>
+								<p>
+									<textarea class="form-control" rows="3"
+										ng-model="noun.description" placeholder="Description"></textarea>
+								</p>
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+					<a href="" class="btn btn-success" ng-click="createNounNow()">Save</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- /container -->
+</section>
+<div id="create-activity" class="modal fade">
+	<div class="modal-dialog modal-sm">
+		<div role="alert" class="alert alert-success">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">&times;</button>
+			Activity has been created successfully.
+		</div>
+	</div>
+</div>
+
+<!-- Delete popup Start-->
+<div id="delete-activity" class="modal fade"
+	data-ng-controller="ProjectController">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header alert alert-danger">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Delete Activity</h4>
+			</div>
+			<div class="modal-body">
+				<p>Do you want to delete the activity ?</p>
+				<p class="text-warning">
+					<small>If you delete, your activity will be lost.</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger"
+					data-ng-click="deleteActivity()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="create-noun" class="modal fade">
+	<div class="modal-dialog modal-sm">
+		<div role="alert" class="alert alert-success">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">&times;</button>
+			Noun has been created successfully.
+		</div>
+	</div>
+</div>
+
+<!-- Delete popup Start-->
+<div id="delete-noun" class="modal fade"
+	data-ng-controller="ProjectController">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header alert alert-danger">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Delete Noun</h4>
+			</div>
+			<div class="modal-body">
+				<p>Do you want to delete the noun?</p>
+				<p class="text-warning">
+					<small>This noun is used in other places as well, so, are you sure you want to delete this noun?</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger"
+					data-ng-click="deleteNoun()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="update-project" class="modal fade">
+	<div class="modal-dialog modal-sm">
+		<div role="alert" class="alert alert-success">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">&times;</button>
+			You Project Updated Successfully.
+		</div>
+	</div>
+</div>
+
+<!-- Delete popup Start-->
+<div id="delete-project" class="modal fade"
+	data-ng-controller="ProjectController">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header alert alert-danger">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Delete Project</h4>
+			</div>
+			<div class="modal-body">
+				<p>Do you want to delete the project ?</p>
+				<p class="text-warning">
+					<small>If you delete, your project will be lost.</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger"
+					data-ng-click="deleteProject()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Delete popup End-->
+
+<!-- Mange Activity popup Start-->
+<div id="mang-act" class="modal  fade">
+	<div class="modal-dialog  modal-sm">
+		<div class="modal-content  modal-sm">
+			<div class="modal-header theme-bg">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Manage Activity</h4>
+			</div>
+			<div class="modal-body modal-sm">
+				<form class="form-horizontal">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12">
+							<label for="" class="control-label">Activity Name :</label>
+							<p>
+								<input type="text" class="form-control" id="" placeholder="">
+							</p>
+							<label for="" class="control-label">Activity Label :</label>
+							<p>
+								<input type="text" class="form-control" id="" placeholder="">
+							</p>
+							<label for="inputPassword3" class="control-label">Description
+								:</label>
+							<p>
+								<textarea class="form-control" rows="3"></textarea>
+							</p>
+						</div>
+
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-success">Update</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Mange Activity popup End-->
+
+
+<!-- Add Noun popup End-->

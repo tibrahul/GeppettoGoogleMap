@@ -1,0 +1,14 @@
+<div class="wizard">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			data-ng-click="close()" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<h3 class="modal-title lead">Launch Wizard</h3>
+	</div>
+	<div class="modal-body">
+		<button class="btn btn-default" data-ng-hide="currentProject.application_type != 2" data-ng-click="createMicroservicesWizardModal()">Create MicroserviceWizard</button>
+        <button class="btn btn-info"  data-ng-hide="currentProject.application_type != 2 || hidebutton" data-ng-click="createAddToWizardModal()"> Add MicroserviceWizard</button> 
+        <button class="btn success" data-ng-hide="currentProject.application_type != 2 || hideEditbutton" data-ng-click="openEditMicroServiceWizard()" >Edit MicroserviceWizard</button> 
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<div class="project">
+    <div class="modal-header">
+        <h3 class="modal-title lead">Enter Email</h3>
+    </div>
+    <div class="modal-body">
+        <form class="create" name="myForm">
+            <div class="form-group">
+                <label for="email">Please enter your email address</label>
+                <input type="text" name="email" class="form-control" placeholder="Enter email" id="email" data-ng-model="modalData.email" data-ng-required="true"    
+				data-ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+				<span
+            data-ng-show="myForm.email.$error.pattern" class="error-msg" style="color: red;">
+            Invalid email address!</span> 
+            <span data-ng-show="myForm.email.$dirty && myForm.email.$error.required"
+				class="error-msg" style="color: red;">Email is required!</span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+         <button class="btn complete" data-ng-disabled="myForm.email.$invalid || myForm.email.$pending" data-ng-click="ok()">Submit</button>
+        <button class="btn btn-default" data-ng-click="close()">Cancel</button>
+    </div>
+</div>

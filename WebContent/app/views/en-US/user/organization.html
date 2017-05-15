@@ -1,0 +1,58 @@
+
+<header class="user" style="width: 2200px;"
+	data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="project">
+	<div class="general">
+		<form class="properties" name="myForm">
+			<div class="item">
+				<label for="name">Organization Name</label> <input type="text" name="name"
+					class="form-control" id="name" placeholder="Enter name"
+					data-ng-model="organization.organization_name" data-ng-required="true"
+					data-ng-maxlength="50">
+			</div>
+				
+			<div class="item">
+				<label for="label">City</label> <input type="text"
+					class="form-control" id="city" placeholder="Enter City"
+					data-ng-model="organization.city">
+			</div>
+			
+			<div class="item">
+				<label for="description">Description</label> <input type="text"
+					class="form-control" id="country"
+					placeholder="Enter country"
+					data-ng-model="organization.country">
+			</div>
+			
+			
+			<div class="item">
+				<label for="userMembers">User members</label>
+				<div data-ng-dropdown-multiselect="" options="individual_user"
+					data-selected-model="selectedUsers"
+					data-extra-settings="multiselectsettings"></div>
+			</div>
+			
+			<div class="item">
+				<label for="label">Contact Details </label> <input type="text"
+					class="form-control" id="contactDetails" placeholder="Contact Details"
+					data-ng-model="organization.contactDetails">
+			</div>
+		<div class="item">
+				<div class="form-group">
+					<label for="entity">About</label> <textarea  
+						class="form-control" placeholder="Enter About"
+						id="about" name="about" data-ng-model="organization.about"
+						data-ng-required="true"></textarea>
+				</div>
+			</div>
+		</form>
+		
+		
+		<div class="action">
+			<button class="btn complete" style="width: 13%;"
+				data-ng-click="createOrganization()">Save</button>
+		</div>
+		
+	</div>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>

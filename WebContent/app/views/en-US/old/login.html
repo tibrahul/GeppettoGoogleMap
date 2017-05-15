@@ -1,0 +1,182 @@
+<div class="main">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-ng-controller="LoginController as loginCtrl">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="container">
+                    <div class="carousel-caption col-sm-5 pull-left">
+                        <div class="carousel-text">
+                            <h1>One more for good measure.</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="container">
+                    <div class="carousel-caption col-sm-5 pull-left">
+                        <div class="carousel-text">
+                            <h1>One more for good measure.</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="container">
+                    <div class="carousel-caption col-sm-5 pull-left">
+                        <div class="carousel-text">
+                            <h1>One more for good measure.</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="home-signup">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5 pull-right">
+                        <div class="form-container">
+                            <h5 class="signin-intro">Welcome to Geppetto Please enter
+                                Your User Id and Password to Sign In ! </h5>
+
+                            <form class="form-horizontal" data-ng-submit="doLogin(loginform,user)" name="loginform"
+                                  novalidate>
+                                <div class="form-group">
+
+                                    <div class="input-group col-sm-12">
+                                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                        <input class="form-control" placeholder="enter your email"
+                                               ng-model="user.email" type="email" name="email" id="mail"
+                                               ng-required="true" ng-pattern="/^\w+@\w+\.\w{2,3}$/"> <span
+                                            ng-show="loginform.email.$error.pattern" class="error-msg">Invalid
+                        email address!</span> <span
+                                            ng-show="loginform.email.$dirty && loginform.email.$error.required"
+                                            class="error-msg">login is required!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-sm-12">
+                                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                                        <input class="form-control" id="" placeholder="enter your password"
+                                               ng-model="user.pass" type="password" name="password" id="psw"
+                                               ng-required="true" min="4" max="16" ng-minlength="4"
+                                               ng-maxlength="16"> <span
+                                            ng-show="loginform.password.$dirty && loginform.password.$error.required"
+                                            class="error-msg">Password is required!</span> <span
+                                            ng-show="loginform.password.$dirty && loginform.password.$error.minlength"
+                                            class="error-msg">Password should have minimum of 4
+                        characters!</span> <span
+                                            ng-show="loginform.password.$dirty && loginform.password.$error.maxlength"
+                                            class="error-msg">Password should have maximum of 16
+                        characters!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-7">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> Remember me
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 pull-right">
+                                        <button type="submit" class="btn theme-bg ">Sign in</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+
+                            <div class="signin-social">
+                                <span class="or-text">OR</span>
+
+                                <div class="btn-group social-btnGroup">
+                                    <a href="" class="social-btn facebook-btn" id=""><i class=" fa fa-facebook"></i>Signin
+                                        with Facebook </a>
+                                    <a href="" class="social-btn google-btn" id=""><i class=" fa fa-google-plus"></i>Signin
+                                        with Google</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="section-bg1">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="title-block"> Fastest way to create Application</h2>
+
+                    <p class="text-center">Lorem ipsum dolor sit amet, cu inani facilis est, mei inermis facilisi
+                        referrentur ut, modo splendide duo an. Dolorem adolescens omittantur id nam, ad inani detracto
+                        disputando duo. Erant delicatissimi in qui. Vim sint consectetuer an, no cum meliore vivendo
+                        appellantur, sea feugait abhorreant percipitur an. Quo ei omnis integre elaboraret, et quo debitis
+                        vivendum. Sea no solum accumsan assentior, vis id ullum docendi oportere.</p>
+
+                    <p class="text-center">Ius salutatus assueverit ei. Nam no impetus pertinacia, ne expetenda hendrerit
+                        cum, eam quod antiopam prodesset ex. Ut ocurreret disputationi vim, labores admodum an qui, magna
+                        inermis eu his. Cibo doctus efficiendi vis an. Hinc iusto concludaturque ad per, soleat suscipiantur
+                        nec ad. Eos ei dictas fabellas constituam.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-bg2">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="title-block"> Feature of our applications</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <div class="box-content">
+                        <i class="fa fa-scissors icon-identity"></i>
+
+                        <p class="text-justify">Lorem ipsum dolor sit amet, cu inani facilis est, mei inermis facilisi
+                            referrentur ut, modo splendide duo an. Dolorem adolescens omittantur id nam, ad inani detracto
+                            disputando duo. Erant delicatissimi in qui. Vim sint consectetuer an, no cum meliore vivendo
+                            appellantur, sea feugait abhorreant percipitur an. Quo ei omnis integre elaboraret, et quo
+                            debitis vivendum. </p>
+                        <a href="" class="btn theme-bg  pull-right">Read More </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="box-content">
+                        <i class="fa fa-recycle icon-identity"></i>
+
+                        <p class="text-justify">Lorem ipsum dolor sit amet, cu inani facilis est, mei inermis facilisi
+                            referrentur ut, modo splendide duo an. Dolorem adolescens omittantur id nam, ad inani detracto
+                            disputando duo. Erant delicatissimi in qui. Vim sint consectetuer an, no cum meliore vivendo
+                            appellantur, sea feugait abhorreant percipitur an. Quo ei omnis integre elaboraret, et quo
+                            debitis vivendum. </p>
+                        <a href="" class="btn theme-bg  pull-right">Read More </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="box-content">
+                        <i class="fa fa-desktop icon-identity"></i>
+
+                        <p class="text-justify">Lorem ipsum dolor sit amet, cu inani facilis est, mei inermis facilisi
+                            referrentur ut, modo splendide duo an. Dolorem adolescens omittantur id nam, ad inani detracto
+                            disputando duo. Erant delicatissimi in qui. Vim sint consectetuer an, no cum meliore vivendo
+                            appellantur, sea feugait abhorreant percipitur an. Quo ei omnis integre elaboraret, et quo
+                            debitis vivendum. </p>
+                        <a href="" class="btn theme-bg  pull-right">Read More </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>

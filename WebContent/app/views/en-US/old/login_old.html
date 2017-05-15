@@ -1,0 +1,43 @@
+<div class="login-content row" ng-controller="LoginController as loginCtrl">
+	<div class="bg-pic">
+		<img src="app/img/login.jpg" alt="Login">
+		<div class="bg-caption">
+			<h2>Geppetto</h2>
+			<p>NewPortBay LLC - all rights reserved &copy; 2014 - 2015</p>
+		</div>
+	</div>
+	<div class="login-container">
+		<h1>Geppetto</h1>
+		<form class="login-form" data-ng-submit="doLogin(loginform,user)" name="loginform" novalidate>
+			<h3>Sign into your account</h3>
+			<div class="login-info">
+				<label class="e-mail" for="mail">Login</label> <br> <input
+					ng-model="user.email" type="email" name="email" id="mail"
+					ng-required="true" ng-pattern="/^\w+@\w+\.\w{2,3}$/"> <span
+					ng-show="loginform.email.$error.pattern" class="error-msg">Invalid
+					email address!</span> <span
+					ng-show="loginform.email.$dirty && loginform.email.$error.required"
+					class="error-msg">login is required!</span>
+			</div>
+			<div class="login-info">
+				<label class="password" for="psw">Password</label> <br> <input
+					ng-model="user.pass" type="password" name="password" id="psw"
+					ng-required="true" min="4" max="16" ng-minlength="4"
+					ng-maxlength="16"> <span
+					ng-show="loginform.password.$dirty && loginform.password.$error.required"
+					class="error-msg">Password is required!</span> <span
+					ng-show="loginform.password.$dirty && loginform.password.$error.minlength"
+					class="error-msg">Password should have minimum of 4
+					characters!</span> <span
+					ng-show="loginform.password.$dirty && loginform.password.$error.maxlength"
+					class="error-msg">Password should have maximum of 16
+					characters!</span>
+			</div>
+			<div class="check">
+				<input type="checkbox" name="new-user" id="n-user"
+					ng-model="isNewUser" /> <label for="n-user">New User</label> <br>
+			</div>
+			<button type="submit" class="btn btn-primary">Sign in</button>
+		</form>
+	</div>
+</div>

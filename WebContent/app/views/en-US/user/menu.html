@@ -1,0 +1,38 @@
+<div class="menu" ng-controller="MenuController as menu">
+	<accordion> <accordion-group heading="Menu" is-open="true"
+		class="user-nouns">
+	<div class="general" ng-show="menu_list.length">
+		<div class="action">
+			<button class="btn complete" data-ng-click="onSubmit()">{{submit}}</button>
+			<button class="btn btn-info" data-ng-click="cancelProject()">Cancel</button>
+		</div>
+		<hr>
+		<form class="properties" name="menu_info" novalidate>
+			<div class="item">
+				<div class="menu-tree">
+					<tree list="menu_list" node="node"></tree>
+				</div>
+			</div>
+			<div class="item">
+				<label for="menu_name">Name: </label> <input type="text"
+					data-ng-model="node.name" id="txtbox-name" class="form-control"
+					placeholder="Enter name"> <label for="menu_label">Label:
+				</label> <input type="text" data-ng-model="node.label" class="form-control"
+					placeholder="Enter label"> <label for="menu_description">Description:
+				</label> <input type="text" data-ng-model="node.description"
+					class="form-control" placeholder="Enter description">
+			</div>
+		</form>
+		<hr>
+		<div class="action">
+			<button class="btn complete" data-ng-click="onSubmit()">{{submit}}</button>
+			<button class="btn btn-info" data-ng-click="cancelProject()">Cancel</button>
+		</div>
+		<hr>
+	</div>
+	<div ng-hide="menu_list.length">Menu is empty</div>
+	</accordion-group> <!-- <accordion-group heading="Other Options" class="other-menus">
+	<p>TBD</p>
+	</accordion-group></accordion> -->
+</div>
+

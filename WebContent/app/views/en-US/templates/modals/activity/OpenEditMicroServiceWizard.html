@@ -1,0 +1,27 @@
+<div class="wizard">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			data-ng-click="close()" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<h3 class="modal-title lead">Wizard Edit View</h3>
+	</div>
+	<div class="modal-body">
+		<form class="create" name="myForm">
+			<div class="form-group">
+				<label for="WizardList">Add To Edit</label> <br>
+				<select class="form-control ng-pristine ng-valid ng-touched"
+					name="gpMicroService" data-ng-model="gpMicroService"
+					title="gpMicroService" autofocus="autofocus" data-ng-change="hideRemove(gpMicroService)"
+						data-ng-options="gpMicroService as gpMicroService.microservice_name for gpMicroService in modalData.gpMicroService track by gpMicroService.id"><option
+						value="" selected="selected">---Select---</option></select>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<!-- <button class="btn complete" data-ng-click="save(gpMicroService)">Next</button> -->
+		<button class="btn complete " data-ng-hide="hidebuttons" data-ng-click="Update(gpMicroService)">Update</button>
+		<button class="btn complete"  data-ng-hide="hidebuttons || hideRemoveButton" data-ng-click="Delete(gpMicroService)">Remove Activites</button>
+		<button class="btn btn-default" data-ng-click="close()">Cancel</button>
+	</div>
+</div>

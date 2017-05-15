@@ -1,0 +1,94 @@
+<div class="project">
+  <div class="modal-header">
+    <h3 class="modal-title lead">Add Project</h3>
+  </div>
+  <div class="modal-body">
+    <form class="create" name="myForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control" placeholder="Enter name" id="name"
+               data-ng-model="modalData.projectName" data-ng-required="true" validator name-type="project"
+               data-ng-maxlength="50">
+        <ul class="error-msgs" data-ng-messages="myForm.name.$error" style="color: red;font-style: italic;">
+          <li data-ng-message="whiteSpaceValidator">
+            Whitespace not allowed!
+          </li>
+          <li data-ng-message="specialCharacterValidator">
+            Special character except underscore,hyphen are not allowed!
+          </li>
+          <li data-ng-message="uniqueNameValidator">
+            Name already taken!
+          </li>
+          <li data-ng-message="startAlphabetValidator">
+            Name should start with an alphabet!
+          </li>
+          <li data-ng-message="restrictedNameValidator">
+            This word is a reserved keyword.Please try another name!
+          </li>
+          <li data-ng-show="myForm.name.$dirty && myForm.name.$error.maxlength">
+            Name can have maximum 50 characters!
+          </li>
+          <li data-ng-show="myForm.name.$dirty && myForm.name.$error.required">
+            Name is required!
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label for="label">Label</label>
+        <input type="text" class="form-control" placeholder="Enter label" id="label"
+               data-ng-model="modalData.projectLabel">
+      </div>
+      <div class="form-group">
+        <label for="entity">Entity / Company</label>
+        <input type="text" class="form-control" placeholder="Enter entity / company" id="entity" name="entity"
+               data-ng-model="modalData.projectCompany" data-ng-required="true" validator name-type="entity">
+        <ul class="error-msgs" data-ng-messages="myForm.entity.$error" style="color: red;font-style: italic;">
+          <li data-ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+          <li data-ng-message="no_specialCharacterValidator">No Special characters are not allowed!</li>
+           <li data-ng-message="startValidator">Entity / Company should start with  an alphabet!</li>	
+		  <li data-ng-show="myForm.entity.$dirty && myForm.entity.$error.required">Name is required!</li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+          <textarea class="form-control" placeholder="Enter description" rows="3" id="description"
+                    data-ng-model="modalData.projectDescription"></textarea>
+      </div>
+      <!--<div class="form-group">-->
+        <!--<label>Type</label>-->
+        <!--<div class="options">-->
+          <!--<label class="form-checkbox">-->
+            <!--<input type="checkbox">-->
+            <!--<span>Browser Based</span>-->
+          <!--</label>-->
+          <!--<label class="form-checkbox">-->
+            <!--<input type="checkbox">-->
+            <!--<span>Mobile</span>-->
+          <!--</label>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="form-group">
+        <label for="primary">Primary Language</label>
+        <select id="primary" data-ng-model="modalData.mainLanguage" class="form-control"
+                data-ng-options="opt.name for opt in mainLanguages track by opt.id"
+                data-ng-change="additionalLanguageDropdown(modalData.mainLanguage.name)">
+          <option value="0" selected="selected">Primary Language</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="secondary">Secondary Language</label>
+        <div id="secondary" data-ng-dropdown-multiselect="" options="modalData.additionalLanguages"
+             selected-model="modalData.selectedadditionallanguages"
+             extra-settings="modalData.multiselectsettings"></div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+     <button class="btn complete"
+            data-ng-disabled="myForm.name.$invalid || myForm.name.$pending || myForm.entity.$invalid || myForm.entity.$pending"
+            data-ng-click="ok('create')">Create
+     </button>
+  <!--   <button class="btn success" data-ng-click="ok('adv')">Advanced</button> -->
+    <button class="btn btn-default" data-ng-click="close()">Cancel</button>
+  </div>
+</div>

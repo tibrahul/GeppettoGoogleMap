@@ -1,0 +1,20 @@
+<header class="user" style="width: 2200px;"
+	data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="noun">
+	<form class="form-horizontal" role="form">
+	<div>
+	<h2>LIST OF NEW USERS</h2>
+		<div ui-grid="gridOptions" ui-grid-selection class="myGrid"
+			style="position: relative; width: 947px;left: 63px; top: 0px;"></div>
+	</div>
+		<!-- The below button and input fields using to search by username -->
+		<!-- <button type="submit" class="generated-button"
+			data-ng-click="search()"
+			style="position: absolute; width: 108px; height: 62px; left: 716px; top: 89px;">search
+			username</button>
+		<input class="generated-input generated-input-text" type="text"
+			data-ng-model="SearchListScreen.username"
+			style="position: absolute; width: 403px; height: 35px; left: 199px; top: 101px;" /> -->
+	</form>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>

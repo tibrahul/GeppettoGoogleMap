@@ -1,0 +1,13 @@
+<script type="text/ng-template" id="items_renderer.html">
+<div ui-tree-handle ng-click="selectNode(item)" ng-class="{ 'selected-node' : item.currentNode , 'unselected-node' : !item.currentNode}">
+	<a class="btn btn-success btn-xs" ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a> {{item.label}} <a class="pull-right btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a> <a class="pull-right btn btn-primary btn-xs"   ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+</div>
+<ol ui-tree-nodes="options" ng-model="item.screen_detail" ng-class="{hidden: collapsed}">
+	<li ng-repeat="item in item.screen_detail" ui-tree-node ng-include="'items_renderer.html'"></li>
+</ol>
+</script>
+<div data-ui-tree="options" data-drag-delay="200">
+	<ol data-ui-tree-nodes data-ng-model="list">
+		<li data-ng-repeat="item in list" data-ui-tree-node data-ng-include="'items_renderer.html'"></li>
+	</ol>
+</div>

@@ -1,0 +1,212 @@
+<!--  Date Created: March 09 2016
+ @author Thamizhmani
+ I created a Add New Row Button to add new rows to the noun property grid below heading property.
+ -->
+
+<header class="user" style="width: 2200px;" data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="noun" data-ng-controller="NounCtrl as nounCtrl">
+  <h1 class="title">Noun Designer</h1>
+  <button class="btn complete go-back" data-ng-click="gotoProject()">Go Back</button>
+  <tabset class="tabs">
+    <tab heading="Manage Noun">
+      <div class="action">
+        <span data-ng-if="mode=='create'">
+          <button class="btn btn-success" type="button" data-ng-click="submitNoun()"
+                  data-ng-disabled="!nounvalues.name || $root.myForm.name.$invalid || $root.myForm.name.$pending || $root.myForm1.$invalid || $root.myForm1.$pending">Create</button>
+          <button class="btn btn-info" type="reset" data-ng-click="cancelNoun()">Cancel</button>
+        </span>
+        <span data-ng-if="mode=='update'">
+          <button class="btn btn-success" type="button" data-ng-click="updateNoun()"
+                  data-ng-disabled="!nounvalues || $root.myForm.name.$invalid || $root.myForm.description.$invalid || $root.myForm.name.$pending || $root.myForm1.$invalid || $root.myForm1.$pending">Update</button>
+          <button class="btn btn-danger" type="button"
+                  data-ng-disabled="!nounvalues" id="btnStickUpSizeToggler"
+                  data-ng-click="deleteNoun()">Delete</button>
+          <button class="btn btn-info" type="reset" data-ng-click="cancelNoun()">Cancel</button>
+        </span>
+      </div>
+      <br>
+      <accordion>
+        <accordion-group heading="Required Information" is-open="true" class="required-info">
+          <form class="required" name="$root.myForm">
+            <div class="item col-sm-4">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter name"
+                     data-ng-model="nounvalues.name" validator name-before-edit="{{nounInfo.name}}" name-type="noun"
+                     project-id="{{nounInfo.proj_id}}" data-ng-required="true" data-ng-maxlength="50">
+              <ul class="error-msgs" data-ng-messages="$root.myForm.name.$error"
+                  style="color: red; font-style: italic;">
+                <li data-ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+                <li data-ng-message="specialCharacterValidator">Special character except underscore,hyphen are not
+                  allowed!
+                </li>
+                <li data-ng-message="uniqueNameValidator">Name already taken!</li>
+                <li data-ng-message="startAlphabetValidator">Name should start with an alphabet!
+                </li>
+                <li data-ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!
+                </li>
+                <li data-ng-show="$root.myForm.name.$dirty && $root.myForm.name.$error.maxlength">Name should have
+                  maximum of 50 characters!
+                </li>
+                <li data-ng-show="$root.myForm.name.$dirty && $root.myForm.name.$error.required">Name is required!
+                </li>
+              </ul>
+            </div>
+            <div class="item col-sm-4">
+              <label for="description">Label</label>
+              <input type="text" class="form-control" id="description" name="description" placeholder="Enter label"
+                     data-ng-model="nounvalues.label" data-ng-required="true">
+              <ul class="error-msgs" data-ng-messages="$root.myForm.description.$error"
+                  style="color: red; font-style: italic;">
+                <li data-ng-show="$root.myForm.description.$dirty && $root.myForm.description.$error.required">Label is required!
+                </li>  
+              </ul>
+            </div>
+            <div class="item col-sm-4">
+              <label for="description">Description</label>
+              <input type="text" class="form-control" id="description" placeholder="Enter description"
+                     data-ng-model="nounvalues.description">
+            </div>
+            <div class="item col-sm-4">
+              <label for="properties">Copy properties from</label>
+              <select class="form-control" name="copy" title="Copp noun properties from" autofocus="autofocus"
+                      required="required" data-ng-model="nounData"
+                      data-ng-options="type as type.label for type in allNounProject">
+                <option value="">---Select---</option>
+              </select>
+            </div>
+          </form>
+          <form class="properties" name="$root.myForm1">
+            <div class="properties">
+              <h3 class="title lead">Properties</h3>
+              <ul class="error-msgs" data-ng-messages="$root.myForm1.$error" style="color: red; font-style: italic;">
+                <li data-ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+                <li data-ng-message="specialCharacterValidator">Special character except underscore,hyphen are not
+                  allowed!
+                </li>
+                <li data-ng-message="uniqueNameValidator">Name already taken!</li>
+                <li data-ng-message="startAlphabetValidator">Name should start with an alphabet!
+                </li>
+                <li data-ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!
+                </li>
+                <li data-ng-show="$root.myForm1.$dirty && $root.myForm1.$error.maxlength">Name should have maximum of 50
+                  characters!
+                </li>
+                <li data-ng-show="$root.myForm1.propertyName.$dirty && $root.myForm1.propertyName.$error.required">Name is required!
+                </li>
+                <li data-ng-show="$root.myForm1.propertyType.$dirty && $root.myForm1.propertyType.$error.required">Type is required!
+                </li>
+              </ul>
+              <button data-ng-click="addNewRow()" class="btn btn-success">Add New Row</button>
+              <br>
+              <br>
+              <div ui-grid="gridOptions" ui-grid-edit class="table"></div>
+
+
+              <!-- old version table -->
+              <!--
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Label</th>
+    <th>Type</th>
+    <th>Modifier</th>
+    <th>Description</th>
+    <th>Unique</th>
+  </tr>
+</thead>
+<tbody>
+  <tr
+    data-ng-repeat="nounAttributes in nounvalues.nounattributes track by $index">
+    <th scope="row"><editable-data
+        input-data="nounAttributes.name"></editable-data></th>
+    <td><editable-data input-data="nounAttributes.label"></editable-data></td>
+    <td><select class="full-width hover" name="copy"
+      data-ng-model="nounAttributes.subtype" data-init-plugin="select2"
+      title="Copp noun properties from" autofocus="autofocus"
+      style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+      data-ng-options="nounType.label as nounType.label for nounType in nounType"
+      data-ng-change="setModifier(nounAttributes)">
+        <option value="">---Select---</option>
+    </select></td>
+    <td>{{nounAttributes.subtypemodifiervalue}}</td>
+    <td><editable-data input-data="nounAttributes.description"></editable-data></td>
+    <td>
+      <p class="tech-checkbox">
+        <input id="check{{$index}}" type="checkbox" name="check"
+          data-ng-checked="nounAttributes.ispart_of_unique_key"
+          data-ng-model="nounAttributes.ispart_of_unique_key">&nbsp; <label
+          for="check{{$index}}"></label>
+      </p>
+    </td>
+  </tr>
+  <tr data-ng-click="addNewRow()">
+    <th scope="row">Click to add</th>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table> -->
+            </div>
+          </form>
+          <hr>
+          <!-- <div>
+            <h3 class="title lead">Relationships</h3>
+            <form class="relationships">
+              <label for="none" class="form-radio">
+                <input type="radio" data-ng-checked="isNone" name="relationships" id="none" value="none">
+                <span>None</span>
+              </label>
+              <label for="parent" class="form-radio">
+                <input type="radio" data-ng-checked="parentOf" name="relationships" id="parent" value="parent">
+                <span>Parent Of</span>
+              </label>
+              <select class="form-control hover" name="copy" data-ng-disabled="!parentOf" data-init-plugin="select2"
+                      title="Parent Noun" autofocus="autofocus" data-ng-model="noun.parents"
+                      data-ng-options="parent as parent.label for parent in allNounProject">
+                <option value="">---Select---</option>
+              </select>
+              <label for="child" class="form-radio">
+                <input type="radio" data-ng-checked="childOf" name="relationships" id="child" value="child">
+                <span>Child Of</span>
+              </label>
+              <select class="form-control hover" name="copy" data-ng-disabled="!childOf" data-init-plugin="select2"
+                      title="Child Noun" autofocus="autofocus" data-ng-model="noun.children"
+                      data-ng-options="child as child.label for child in allNounProject">
+                <option value="">---Select---</option>
+              </select>
+            </form>
+          </div>
+          <hr>
+          <div class="cache">
+            <label for="cache" class="form-checkbox">
+              <input type="checkbox" id="cache" data-ng-checked="nounvalues.cacheable"
+                     data-ng-model="nounvalues.cacheable"> <span>Cache Enabled</span>
+            </label>
+          </div> -->
+        </accordion-group>
+        <accordion-group heading="Documentation" class="docs">
+          <textarea data-ng-model="nounvalues.notes" data-ck-editor></textarea>
+        </accordion-group>
+      </accordion>
+      <div class="action">
+                <span data-ng-if="mode=='create'">
+			<button class="btn btn-success" type="button" data-ng-click="submitNoun()"
+              data-ng-disabled="!nounvalues.name || $root.myForm.name.$invalid || $root.myForm.name.$pending || $root.myForm1.$invalid || $root.myForm1.$pending">Create</button>
+			<button class="btn btn-info" type="reset" data-ng-click="cancelNoun()">Cancel</button>
+		</span> <span data-ng-if="mode=='update'">
+			<button class="btn btn-success" type="button" data-ng-click="updateNoun()"
+              data-ng-disabled="!nounvalues || $root.myForm.name.$invalid || $root.myForm.description.$invalid || $root.myForm.name.$pending || $root.myForm1.$invalid || $root.myForm1.$pending">Update</button>
+			<button class="btn btn-danger" type="button"
+              data-ng-disabled="!nounvalues" id="btnStickUpSizeToggler"
+              data-ng-click="deleteNoun()">Delete</button>
+			<button class="btn btn-info" type="reset" data-ng-click="cancelNoun()">Cancel</button>
+		</span>
+      </div>
+    </tab>
+  </tabset>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>

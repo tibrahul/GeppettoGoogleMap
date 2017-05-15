@@ -1,0 +1,214 @@
+<a class="logo" href="#/en-US/projects/"> <img
+	src="app/img/lego.svg" alt="Geppetto" width="48" height="48"> <span
+	class="lead">Geppetto</span>
+</a>
+<!-- For showing the ADMIN related menu for the below css working-->
+<style>
+#topnav {
+	padding: 0;
+	color: #333;
+	background-color: #20a0e7;
+	clear: both;
+	word-wrap: normal;
+	white-space: nowrap;
+}
+
+#topnav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
+#topnav ul ul {
+	z-index: 9999;
+	position: absolute;
+	width: 190px;
+	text-transform: none;
+}
+
+#topnav ul ul ul, #topnav ul ul ul ul {
+	left: 190px;
+	top: 0;
+}
+
+#topnav ul:first-child li:last-child>ul {
+	right: 0;
+}
+
+#topnav ul:first-child>li:last-child li>ul {
+	left: -190px;
+}
+
+#topnav li {
+	position: relative;
+	display: block;
+	float: left;
+	margin: 0 30px 0 0;
+	padding: 0;
+}
+
+#topnav li:first-child {
+	
+}
+
+#topnav ul:first-child li:last-child {
+	margin-right: 0;
+}
+
+#topnav li li {
+	width: 100%;
+	margin: 0;
+}
+
+#topnav li a {
+	display: block;
+	padding: 20px 0;
+}
+
+#topnav li li a {
+	display: block;
+	margin: 0;
+	padding: 10px 15px;
+}
+
+#topnav ul ul {
+	display: none;
+}
+
+#topnav ul li:hover>ul {
+	display: block;
+}
+/* #topnav a{color:#BDCFBD; background-color:#0fbaf3; font-weight:bold;} */
+#topnav a {
+	background-color: #20a0e7;
+	font-weight: bold;
+	font-size: small;
+}
+
+#topnav li li a, #topnav li.active li a {
+	color: #333;
+	background: #f5f5f5;
+	font-weight: normal;
+}
+
+#topnav li.active a, #topnav a:hover {
+	color: #fff;
+	background-color: #20a0e7;
+}
+
+#topnav ul li li:hover>a {
+	color: #eee;
+	background-color: #20a0e7;
+}
+
+#topnav li a.drop, #topnav li.active a.drop {
+	padding-left: 15px;
+	background-image: url("images/dropdown_side.gif");
+	background-position: 5px center;
+	background-repeat: no-repeat;
+}
+
+#topnav ul li ul li {
+	float: none;
+	z-index: 2;
+}
+
+#topnav ul li ul {
+	position: absolute;
+	display: none;
+}
+
+#topnav ul li ul :hover ul {
+	display: block;
+}
+
+/* Top navigation for smaller resolutions */
+#topnav form {
+	display: block;
+	height: 30px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+
+#topnav form select {
+	display: block;
+	width: 100%;
+	padding: 8px;
+	color: #FFFFFF;
+	background-color: #20a0e7;
+	border: 1px solid #20a0e7;
+	cursor: pointer;
+	outline: none;
+}
+
+#topnav form select option {
+	display: block;
+	margin: 10px;
+	padding: 0;
+	cursor: pointer;
+	outline: none;
+	border: none;
+}
+</style>
+<nav class="menu">
+	<ul>
+		<li class="active"><a href="#/en-US/projects/">Projects</a></li>
+		<!-- SureshAnand Added New User tab For only Admin role  -->
+		<!--  <li data-ng-controller="LoginCtrl"> -->
+		<!-- <a data-ng-if="$root.roleOfLoggedUser == 'ROLE_ADMIN'" href="#/en-US/new_user/">New_Users</a> -->
+		<nav data-ng-if="$root.roleOfLoggedUser == 'ROLE_ADMIN'" id="topnav">
+			<ul>
+				<li><a class="drop" title="industry/dealer">ADMIN</a>
+					<ul>
+						<li><a href="" title="Category">User Management</a>
+							<ul>
+								<li><a href="#/en-US/new_user/" title="Add Category">New_Users</a></li>
+							</ul></li>
+							
+							<li><a href="" title="organization">Organization</a>
+							<ul>
+								<li><a href="#/en-US/organization/" title="Add Category">create
+										organization</a></li>
+							</ul></li>
+							
+						<!-- <li><a href="" title="State">Sample Two</a>
+							<ul>
+								<li><a href="" title="Add State">Add</a></li>
+							</ul></li> -->
+					</ul></li>
+			</ul>
+
+		</nav>
+		<nav  data-ng-if="$root.roleOfLoggedUser == ''" id="topnav">
+			<ul >
+				<li><a class="drop" title="prefernces">Preferences</a>
+					<ul>
+						<li><a href="" title="organization">Organization</a>
+							<ul>
+								<li><a href="#/en-US/organization/" title="Add Category">create
+										organization</a></li>
+							</ul></li>
+						<!-- <li><a href="" title="State">Members</a>
+							<ul>
+								<li><a href="" title="Add State">Add Members</a></li>
+							</ul></li> -->
+					</ul></li>
+			</ul>
+		</nav>
+		<li class="sign-out">
+			<!-- href="#/en-US/home/" --> <a data-ng-click="signOut()"> <i
+				class="fa fa-sign-out"></i> <span>Sign out</span>
+		</a>
+		</li>
+	</ul>
+
+
+
+</nav>
+ 
+<nav id="topnav">
+	<ul class="clear">
+	</ul>
+</nav>

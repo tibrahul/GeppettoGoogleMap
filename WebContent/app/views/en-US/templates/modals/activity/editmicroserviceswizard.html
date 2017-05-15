@@ -1,0 +1,31 @@
+<div class="project">
+  <div class="modal-header">
+    <h3 class="modal-title lead">Update Wizard</h3>
+  </div>
+  <div class="modal-body">
+    <form class="create" name="myForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control" placeholder="Enter name" id="name"
+               data-ng-model="modalData.microservice_name" data-ng-required="true" 
+               data-ng-maxlength="50">
+               <span class="error-msg" style="color: red;" >{{errorMsg}}</span>
+      <br>
+        <label for="name">Description</label>
+        <textarea rows="3" cols="10" name="description" class="form-control" placeholder="Enter description.." id="description"
+               data-ng-model="modalData.description" data-ng-required="false"></textarea>
+      <br>
+        <label for="name">Notes</label>
+        <textarea class="form-control" placeholder="Enter description.." id="notes"
+               data-ng-model="modalData.notes" data-ng-required="false" data-ck-editor></textarea>
+      
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn complete"
+            data-ng-click="update()">Update
+    </button>
+    <button class="btn btn-default" data-ng-click="close()">Cancel</button>
+  </div>
+</div>

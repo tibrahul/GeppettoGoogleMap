@@ -1,0 +1,193 @@
+<div class="create-popUp-back" data-ng-controller="ProjectController">
+		<div class="create-popUp">
+			<h1>Create Project</h1>
+			<h3>Required Options</h3>
+			<form name="projectForm">
+				<div class="create-popUp-section">
+					<label for="proj-name">Project Name: </label>
+					<input data-ng-model="projectName" type="text" name="project-name"
+						id="proj-name" required>
+				</div>
+				<div class="create-popUp-section">
+					<label for="proj-label">Project Label: </label>
+					<input
+						data-ng-model="projectLabel" type="text" name="project-label"
+						id="proj-label" required>
+				</div>
+				<div class="create-popUp-section">
+					<label for="proj-comp">Entity/Company: </label>
+					<input
+						data-ng-model="projectCompany" type="text" name="project-comp"
+						id="proj-comp" required>
+				</div>
+				<div class="create-popUp-section">
+					<label for="proj-desc">
+						Project Description:
+					</label>
+					<input data-ng-model="projectDescription" type="text" name="project-desc"
+						id="proj-desc" required>
+				</div>
+				<div>
+					<label>Project Notes:</label>
+					<quill id="project_notes">
+				</div>
+				<div class="select-language pull-left">
+					<h4>Select Project Default Language (Required)</h4>
+					<select data-ng-model="mainLanguage"
+							data-ng-options="opt.name for opt in mainLanguages track by opt.id">
+					</select>
+				</div>
+				<div class="select-language pull-left">
+					<h4>Select Project Other Languages (Optional)</h4>
+					<select id="additional-language">
+						<option value="eng">English</option>
+						<option value="arm">Armenian</option>
+						<option value="rus">Russian</option>
+						<option value="spa">Spanish</option>
+					</select>
+				</div>
+				<div class="clear"></div>
+				<a class="btn left" data-ng-click="accordion()">Advanced Options</a>
+				<a class="projectComponentsButton btn left" data-ng-click="openProjectComponents()">
+					Project Components
+				</a>
+				<input type="submit" value="{{submit}}" class="btn submit right" ng-disabled="!(!!projectName || !!projectLabel  || !!projectCompany || !!projectDescription)">
+				<div class="clear"></div>
+				<div class="text-center">
+					<a class="btn" data-ng-click="openAbout()">About</a>
+				</div>
+			</form>
+		</div>
+		<div class="project-components">
+			<div class="project-components-inside">
+				<div class="project-components-list">
+					<h4>Label</h4>
+					<h4>Name</h4>
+					<h4>Description</h4>
+					<div class="clear"></div>
+					<ul>
+ 						<li data-ng-repeat="activity in activities" id="{{activity.id}}"
+							data-ng-click="updateActivity(activity.id)">
+							<p>{{activity.label}}</p>
+							<p>{{activity.name}}</p>
+							<p>{{activity.description}}</p>
+						</li>
+					</ul>
+				</div>
+				<a class="create-activity pull-right" data-ng-click="createActivity()">Create New Activity</a>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="create-project-advanced">
+			<h1>Advanced Options</h1>
+			<div class="row">
+				<div class="create-project-advanced-sections pull-left">
+					<h4>Client Properties:</h4>
+					<div class="CPA-element">
+						<h5>Client OS Types</h5>
+						<select id="os-type"></select>
+					</div>
+					<div class="CPA-element">
+						<h5>Client Device Types</h5>
+						<select id="device-type">
+							<option value="client_device_types">Option 1</option>
+							<option value="client_device_types">Option 2</option>
+							<option value="client_device_types">Option 3</option>
+							<option value="client_device_types">Option 4</option>
+						</select>
+					</div>
+					<div class="CPA-element">
+						<h5>Client Development Languages</h5>
+						<select id="dev-languages"></select>
+					</div>
+					<div class="CPA-element">
+						<h5>Client Development Frameworks</h5>
+						<select id="dev-frameworks"></select>
+					</div>
+					<div class="CPA-element">
+						<h5>Client Widget Frameworks</h5>
+						<select id="widget-frameworks">
+							<option value="client_widget_frameworks">Kendo</option>
+							<option value="client_widget_frameworks">Widgemo</option>
+							<option value="client_widget_frameworks">Sencha</option>
+						</select>
+					</div>
+					<div class="CPA-element">
+						<h5>Client CSS Frameworks</h5>
+						<select id="css-frameworks"></select>
+					</div>
+					<div class="CPA-element">
+						<h5>Client Code Pattern</h5>
+						<select data-ng-model="clientCodePattern"
+								data-ng-options="opt.name for opt in clientCodePatterns track by opt.id">
+						</select>
+					</div>
+				</div>
+				<div class="create-project-advanced-sections pull-right">
+					<h4>Server Properties:</h4>
+					<div class="CPA-element">
+						<h5>Server Code Pattern</h5>
+						<select data-ng-model="serverCodePattern"
+								data-ng-options="opt.name for opt in serverCodePatterns track by opt.id">
+						</select>
+					</div>
+					<div class="CPA-element">
+						<h5>Server Dev Languages</h5>
+						<select data-ng-model="serverDevelopmentLanguage"
+								data-ng-options="opt.name for opt in serverLanguages track by opt.id">
+						</select>
+					</div>
+					<div class="CPA-element">
+						<h5>Server Dev Framework</h5>
+						<select data-ng-model="serverDevelopmentFramework"
+								data-ng-options="opt.name for opt in serverDevFramework track by opt.id">
+						</select>
+					</div>
+					<div class="CPA-element">
+						<h5>Server Run Time</h5>
+						<select data-ng-model="serverRunTime"
+								data-ng-options="opt.name for opt in serverRunTimes track by opt.id">
+						</select>
+					</div>
+					<div class="CPA-element">
+						<h5>Server OS</h5>
+						<select data-ng-model="serverOs"
+								data-ng-options="opt.name for opt in serverOS track by opt.id">
+						</select>
+					</div>
+					<div class="CPA-element">
+						<h5>Server DBMS</h5>
+						<select data-ng-model="serverDbms"
+								data-ng-options="opt.name for opt in serverDBMS track by opt.id">
+						</select>
+					</div>
+					<div class="CPA-element">
+						<h5>Server Deployment Environment</h5>
+						<select data-ng-model="serverDepEnviroment"
+								data-ng-options="opt.name for opt in serverDeploymentEnvironment track by opt.id">
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="create-project-advanced-sections other-section">
+				<h4>Other Properties:</h4>
+				<div class="CPA-element">
+					<h5>App UI Template</h5>
+					<select data-ng-model="appUiTemplate"
+							data-ng-options="opt.name for opt in templateOptions track by opt.id">
+					</select>
+				</div>
+				<div class="CPA-element">
+					<h5>UI Navigation Style</h5>
+					<select data-ng-model="uiNavigationStyle"
+							data-ng-options="opt.name for opt in templateOptions track by opt.id">
+					</select>
+				</div>
+				<div class="CPA-element">
+					<h5>Supported Browsers</h5>
+					<select id="supported-browsers"></select>
+				</div>
+			</div>
+			<a class="btn" data-ng-click="accordion()">Hide Advanced</a>
+		</div>
+	</div>

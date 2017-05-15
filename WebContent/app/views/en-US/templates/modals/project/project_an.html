@@ -1,0 +1,109 @@
+<div class="project">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			data-ng-click="close()" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<h3 class="modal-title lead">{{modalObj.title}}</h3>
+	</div>
+	<div class="modal-body">
+
+		<!-- Action - Create  -->
+		<div ng-if="modalObj.action=='create'">
+			<form class="form-horizontal" name="$root.myForm">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<label for="" class="control-label" ng-if="modalObj.type=='template'">Device :</label>
+						<p>
+							<select class="form-control" ng-model="modalObj.dataObj.device" ng-if="modalObj.type=='template'" id="device" name="device" data-ng-required="true">
+								<option value="PC">PC</option>
+								<option value="Tablet">Tablet</option>
+								<option value="Mobile">Mobile</option>
+							</select>
+						</p>
+						<label for="" class="control-label">Name :</label>
+						<p>
+							<input type="text" class="form-control" id="name" name="name"
+								placeholder="Name" data-ng-model="modalObj.dataObj.name"
+								data-ng-required="true" validator name-type="{{modalObj.type}}"
+								project-id="{{modalObj.id}}" data-ng-maxlength="50">
+								<ul class="error-msgs" data-ng-messages="$root.myForm.name.$error"
+					                style="color: red; font-style: italic;list-style: none; width: 100%;margin: 0;
+  									padding: 0;align-self: flex-end;display: flex;flex-basis: 50px;">
+					              <li data-ng-message="specialCharacterValidator">Special characters
+					                except underscore & hyphen are not allowed!
+					              </li>
+					              <li data-ng-message="ntValidName">Name already taken!</li>
+					              <li data-ng-message="startAlphabetValidator">Name should start with
+					                an alphabet!
+					              </li>
+					              <li
+					                data-ng-show="$root.myForm.name.$dirty && $root.myForm.name.$error.required">Name
+					                is required!
+					              </li>
+					            </ul>
+						</p>
+			
+					<!-- <span class="help-block" ng-show="$root.myForm.name.$error.ntValidName">The name is
+					already in use</span>
+					<span class="help-block" style="color: red; font-style: italic;" ng-show="$root.myForm.name.$error.whiteSpaceValidator">
+					White space is not allowed
+					 </span> -->
+					
+						<label for="" class="control-label">Label :</label>
+			<p>
+					       <input type="text" class="form-control" id="" name="Label" placeholder="Label"
+        					ng-model="modalObj.dataObj.label" data-ng-required="true">
+        			<ul class="error-msgs" data-ng-messages="$root.myForm.Label.$error"
+                     			style="color: red; font-style: italic;list-style: none; width: 100%;margin: 0;
+           							padding: 0;align-self: flex-end;display: flex;flex-basis: 50px;">
+	                   <li
+    		                 data-ng-show="$root.myForm.Label.$dirty && $root.myForm.Label.$error.required">Label
+            		         is required!
+                   	 </li>
+                 </ul>
+      		</p>
+						<label for="inputPassword3" class="control-label">Description
+							:</label>
+						<p>
+							<textarea class="form-control" rows="3"
+								ng-model="modalObj.dataObj.description"
+								placeholder="Description"></textarea>
+						</p>
+					</div>
+
+				</div>
+			</form>
+		</div>
+
+		<!-- Action - delete -->
+		<div ng-if="modalObj.action=='delete'">
+			<p class="text-warning">
+				{{modalObj.type}} noun is used in other places as well, so, are you sure you want to delete {{modalObj.type}}?
+			</p>
+		</div>
+
+		<!-- Action - Alert  -->
+		<div ng-if="modalObj.action=='alert'">
+			<p>{{modalObj.message}}</p>
+		</div>
+
+	</div>
+	<div class="modal-footer">
+
+		<!-- Action - create -->
+		<div ng-if="modalObj.action=='create'">
+			<button type="button" class="btn btn-primary" data-ng-click="close()">Cancel</button>
+			<a href="" class="btn btn-success"  data-ng-disabled="$root.myForm.name.$invalid || $root.myForm.Label.$invalid || $root.myForm.name.$pending && $root.myForm.device.$invalid || $root.myForm.device.$pending" ng-click="createHandler()">Save</a> 
+				
+				
+		</div>
+
+		<!-- Action - delete -->
+		<div ng-if="modalObj.action=='delete'">
+			<button type="button" class="btn btn-primary" data-ng-click="close()">Cancel</button>
+			<a href="" class="btn btn-danger" ng-click="deleteHandler()">Delete</a>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<div class="wizard">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			data-ng-click="close()" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<h3 class="modal-title lead">Wizard Edit View</h3>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal" >
+			<div class="row delete-confirmation" ng-if="deleteEntity">
+				<div>
+					<p>Do you want to remove this '<b>{{deleteEntity.microservice_name}}</b>' Wizard from your Activity?</p>
+					<p class="text-warning">
+						<small>If you delete, it will be no more part of the activity.</small>
+					</p>
+					<button class="btn btn-danger" data-ng-click="deleteCall()">Delete</button>
+					<button class="btn btn-default" data-ng-click="cancelDelete()">Cancel</button>
+				</div>
+			</div>
+			<div class="row">
+			<div class="item">
+			<label for="name">&nbsp;&nbsp;&nbsp;Activities for {{microservice_name}}</label>
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div ui-grid="modalObj.gridOptions" ui-grid-edit class="table"></div>
+				</div>
+			</div>
+			</div>
+		</form>
+	</div>
+</div>

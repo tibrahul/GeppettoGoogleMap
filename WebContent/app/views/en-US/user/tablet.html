@@ -1,0 +1,720 @@
+<div class="axe tablet iPad_mini" data-ng-controller="TabletController">
+  <nav class="menu">
+    <ul>
+      <li>
+        <img src="app/img/icons/icon-label.png" alt="Add Label" title="Add Label" id="icon-label">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-button.png" alt="Add Button" title="Add Button" id="icon-button">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-checkbox.png" alt="Add Checkbox" title="Add Checkbox" id="icon-checkbox">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-radio.png" alt="Add Radio Button" title="Add Radio Button" id="icon-radio">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-input.png" alt="Add Text Input" title="Add Text Input" id="icon-input">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-date.png" alt="Add Date Picker" title="Add Date Picker" id="icon-date">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-select.png" alt="Add Dropdown List" title="Add Dropdown List" id="icon-select">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-border-container.png" alt="Add Border Container" title="Add Border Container"
+             id="icon-border-container">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-tab.png" alt="Add Tabs" title="Add Tabs" id="icon-tab">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-rich-text-editor.png" alt="Add Rich Text Editor" title="Add Rich Text Editor"
+             id="icon-rich-text-editor">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-accordion.png" alt="Add Accordion" title="Add Accordion" id="icon-accordion">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-table.png" alt="Add Table" title="Add Table" id="icon-table">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-horizontal-line.png" alt="Add Horizontal Rule" title="Add Horizontal Rule"
+             id="icon-horizontal-line">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-vertical-line.png" alt="Add Vertical Rule" title="Add Vertical Rule"
+             id="icon-vertical-line">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-panel.svg" alt="Add Panel" title="Add Panel" id="icon-panel">
+      </li>
+      <!--  Boopathi -->
+      <li>
+        <img src="app/img/icons/icon-link.svg" alt="Add Link" title="Add Link" id="icon-link">
+      </li>
+      <li>
+        <img src="app/img/icons/icon-image-view.svg" alt="Add Link" title="Add Image" id="icon-image">
+      </li>
+      <li>
+        <img src="app/img/icons/ionic/icon-camera.svg" alt="Add Camera" title="Add Camera" id="icon-camera">
+      </li>
+       <li>
+        <img src="app/img/icons/ionic/record.png" alt="Add Recorder" title="Add Recorder" id="icon-recorder">
+      </li>
+      <li>
+        <img src="app/img/icons/ionic/video.png" alt="Add Video" title="Add Video" id="icon-video">
+      </li>
+    </ul>
+  </nav>
+  <div class="device portrait">
+    <div class="view">
+      <div id="screen" data-role="screen"></div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="orientation btn-toolbar">
+      <button class="btn btn-default active" id="portrait">Portrait</button>
+      <button class="btn btn-default" id="landscape">Landscape</button>
+    </div>
+    <div class="panel-group" id="properties">
+      <div class="panel panel-default active">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#screen_info">Screen Information</a>
+          </h4>
+        </div>
+        <div class="panel-body" id="screen_info">
+          <div class="screen_info">
+            <form name="screen_info" novalidate>
+              <fieldset class="copy-screen hidden">
+                <legend>Copy Screen</legend>
+                <div class="row">
+                  <div class="form-group col-md-9">
+                    <label for="screen_type">Choose screen: </label>
+                    <select class="form-control" id="screen_type"
+                            data-ng-model="screen"
+                            data-ng-options="scr.id as scr.name for scr in screens | filter:scr.client_device_type='tablet'"
+                            data-ng-change="CopyScreen()"
+                            data-ng-change="setScreenLanguage()">
+                      <option value="" disabled>Choose an option</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="row">
+                <div class="form-group col-md-9">
+                  <label for="screen_name">Name: </label>
+                  <input type="text" id="screen_name" name="screen_name" data-ng-model="screen_name"
+                         class="form-control"
+                         placeholder="Enter name" data-validator data-name-type="screen"
+                         name-before-edit="{{screen_name}}"
+                         data-ng-maxlength="50" activity-id="{{activity_id}}" data-ng-required="true">
+                  <ul class="error-msgs" data-ng-messages="screen_info.screen_name.$error"
+                      style="color: red;font-style: italic;">
+                    <li data-ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+                    <li data-ng-message="specialCharacterValidator">Special character except underscore,hyphen are not
+                      allowed!
+                    </li>
+                    <li data-ng-message="uniqueNameValidator">Name already taken!</li>
+                    <li data-ng-message="startAlphabetValidator">Name should start with an alphabet!</li>
+                    <li ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!
+                    </li>
+                    <li data-ng-show="screen_info.screen_name.$dirty && screen_info.screen_name.$error.maxlength">Name
+                      can have maximum 50 characters!
+                    </li>
+                    <li data-ng-show="screen_info.screen_name.$dirty && screen_info.screen_name.$error.required">Name is
+                      required!
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-group col-md-9">
+                  <label for="screen_label">Label: </label>
+                  <input type="text" id="screen_label" data-ng-model="screen_label" class="form-control"
+                         placeholder="Enter label">
+                </div>
+                <div class="form-group col-md-9">
+                  <label for="screen_language">Language: </label>
+                  <select class="form-control" id="screen_language"
+                          data-ng-model="screen_language"
+                          data-ng-options="language.name for language in languages track by language.id">
+                    <option value="" disabled>Choose an option</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-9">
+                  <label for="screen_description">Description: </label>
+                  <input type="text" id="screen_description" data-ng-model="screen_description" class="form-control"
+                         placeholder="Enter description">
+                </div>
+                <!-- SureshAnand Added the Role -->
+                 <div class="form-group col-md-9">
+                   <label for="screen_description">Screen Owner:</label>
+  		          <select data-ng-model="screen_role" class="form-control">
+         		  <option value="">----Select a Role----</option>
+           		  <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                   <option value="ROLE_USER">ROLE_USER</option>
+                 </select> 
+                 </div>
+                <!-- Boopathi -->
+                <div class="form-group col-md-12 ck_editor_hidden">
+                  <textarea data-ck-editor data-ng-model="screen_notes" id="screen_notes"></textarea>
+                </div>
+                <div class="form-group col-md-9">
+                  <fieldset>
+                    <legend>Notes</legend>
+                    <div class="row">
+                      <div class="form-group col-md-9">
+                        <button type="button" class="btn btn-default" data-ng-click="maximizeScreenNotes()">
+                          Add Notes
+                        </button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#components">Components</a>
+          </h4>
+        </div>
+        <div class="panel-body" id="components">
+          <div class="components">
+            <p class="lead">{{element_type}}</p>
+            <form name="element_info" novalidate>
+              <div class="row">
+                <div class="form-group col-md-9">
+                  <label for="element_name">Name: </label>
+                  <input type="text" id="element_name" class="form-control" data-ng-required="true" data-validator
+                         placeholder="Enter name" name="element_name" data-ng-maxlength="50"
+                         data-ng-model-options="{allowInvalid: true}"
+                         data-ng-model="element_name" data-ng-change="setElementName()">
+                  <ul class="error-msgs" data-ng-messages="element_info.element_name.$error"
+                      style="color: red;font-style: italic;">
+                    <li data-ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+                    <li data-ng-message="specialCharacterValidator">Special character except underscore,hyphen are not
+                      allowed!
+                    </li>
+                    <li data-ng-message="uniqueNameValidator">Name already taken!</li>
+                    <li data-ng-message="startAlphabetValidator">Name should start with an alphabet!</li>
+                    <li ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!
+                    </li>
+                    <li data-ng-show="element_info.element_name.$dirty && element_info.element_name.$error.maxlength">
+                      Name can have maximum 50 characters!
+                    </li>
+                    <li data-ng-show="element_info.element_name.$dirty && element_info.element_name.$error.required">
+                      Name is required!
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-group col-md-9">
+                  <label for="element_label">Label: </label>
+                  <input type="text" id="element_label" class="form-control" placeholder="Enter label"
+                         data-ng-model="element_label" data-ng-change="setElementLabel()">
+                </div>
+                <div class="form-group col-md-9">
+                  <label for="element_description">Description: </label>
+                  <input type="text" id="element_description" class="form-control" placeholder="Enter description"
+                         data-ng-model="element_description" data-ng-change="setElementDescription()">
+                </div>
+                <!-- Boopathi -->
+                <div class="form-group col-md-9 hidden" id="form_image_upload">
+                  <label for="element_image">Select Image: </label>
+                  <input type="file" id="element_image" data-image="image" accept="image/*"
+                         onchange="angular.element(this).scope().setImage(this)">
+                </div>
+                
+                
+                <div class="form-group col-md-9 " id="form_camera_prop">
+                  <label for="camera_quality">Camera Quality:</label>
+                  <input type="text" class="form-control" id="camera_quality"
+                         data-ng-model="element_camera_quality"
+                         data-ng-blur="setElementCameraQuality()">
+                         <br>
+                  <label for="camera_destinationType">Destination Type: </label>
+                  <select class="form-control list-box" data-ng-change="setElementCameraDestinationType()"
+                      data-ng-model="element_camera_destinationType"
+                      data-ng-options="dstype.label for dstype in element_camera_destinationTypes">
+                      <option value="">SELECT</option>
+              		</select>
+           </div>
+                
+                
+                <!-- Boopathi -->
+                <div class="form-group col-md-9 hidden" id="form_col_link">
+                  <label for="element_url">URL: </label>
+                  <input type="url" id="element_url" name="element_url" class="form-control"
+                         placeholder="Enter target link"
+                         data-ng-model="element_target_url" data-ng-change="setElementTargetLink()">
+                                           <span class="error" ng-show="element_info.element_url.$error.url"
+                                                 style="color: red;font-style: italic;">
+      											Invalid URL!
+      									   </span>
+
+                </div>
+                <div class="form-group col-md-12 ck_editor_hidden">
+                  <textarea data-ck-editor data-ng-model="element_notes" id="element_notes"
+                            data-ng-change="setElementNotes()"></textarea>
+                </div>
+                <!-- Boopathi -->
+                <div class="form-group col-md-9">
+                  <fieldset>
+                    <legend>Notes</legend>
+                    <div class="row">
+                      <div class="form-group col-md-9">
+                        <button type="button" class="btn btn-default" data-ng-click="maximizeComponentsNotes()">
+                          Add Notes
+                        </button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+            <table class="table table-bordered table-hover">
+              <caption>List of properties of the selected element.</caption>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>{{element_id}}</td>
+                </tr>
+                <tr><!-- Boopathi -->
+                  <td>portrait width</td>
+                  <td><input type="text" class="form-control" data-ng-model="element_portrait_width"
+                             data-ng-change="changePortraitWidth()"></td>
+                </tr>
+                <tr>
+                  <td>portrait height</td>
+                  <td><input type="text" class="form-control" data-ng-model="element_portrait_height"
+                             data-ng-change="changePortraitHeight()"></td>
+                </tr>
+                <tr>
+                  <td>landscape width</td>
+                  <td><input type="text" class="form-control" data-ng-model="element_landscape_width"
+                             data-ng-change="changeLandscapeWidth()"></td>
+                </tr>
+                <tr>
+                  <td>landscape height</td>
+                  <td><input type="text" class="form-control" data-ng-model="element_landscape_height"
+                             data-ng-change="changeLandscapeHeight()"></td>
+                </tr>
+                <tr>
+                  <td>portrait x</td>
+                  <td><input type="text" class="form-control" data-ng-model="element_portrait_x"
+                             data-ng-change="changePortraitLeft()"></td>
+                </tr>
+                <tr>
+                  <td>portrait y</td>
+                  <td><input type="text" class="form-control" data-ng-model="element_portrait_y"
+                             data-ng-change="changePortraitTop()"></td>
+                </tr>
+                <tr>
+                  <td>landscape x</td>
+                  <td><input type="text" class="form-control" data-ng-model="element_landscape_x"
+                             data-ng-change="changeLandscapeLeft()"></td>
+                </tr>
+                <tr>
+                  <td>landscape y</td>
+                  <td><input type="text" class="form-control" data-ng-model="element_landscape_y"
+                             data-ng-change="changeLandscapeTop()"></td>
+                </tr>
+                <tr class="table-data">
+                  <td>rows</td>
+                  <td>{{element_rows}}</td>
+                </tr>
+                <tr class="table-data">
+                  <td>columns</td>
+                  <td>{{element_columns.length}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default hidden" id="grid-panel">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#grid-properties">Grid Properties</a>
+          </h4>
+        </div>
+        <div class="panel-body" id="grid-properties">
+          <div class="grid-properties">
+            <h5 class="lead">Columns</h5>
+            <form novalidate name="grid_info">
+              <select size="5" class="form-control list-box"
+                      data-ng-model="element_column"
+                      data-ng-options="column.label for column in element_columns">
+              </select>
+              <div class="btn-group">
+                <div class="btn-toolbar">
+                  <button data-ng-click="addColumn()">+</button>
+                  <button data-ng-click="removeColumn()">-</button>
+                </div>
+                <div class="btn-toolbar">
+                  <button data-ng-click="moveColumnUp()">Up</button>
+                  <button data-ng-click="moveColumnDown()">Down</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-9">
+                  <label for="column_name">Name: </label>
+                  <input type="text" id="column_name" class="form-control" data-ng-required="true"
+                         data-validator name-before-edit="{{element_column.name}}"
+                         placeholder="Enter name" name="column_name" data-ng-maxlength="50"
+                         data-ng-model-options="{allowInvalid: true}"
+                         data-ng-model="element_column.name" data-ng-change="setColumnName()">
+                  <ul class="error-msgs" data-ng-messages="grid_info.column_name.$error"
+                      style="color: red;font-style: italic;">
+                    <li data-ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+                    <li data-ng-message="specialCharacterValidator">Special character except underscore,hyphen are not
+                      allowed!
+                    </li>
+                    <li data-ng-message="uniqueNameValidator">Name already taken!</li>
+                    <li data-ng-message="startAlphabetValidator">Name should start with an alphabet!</li>
+                    <li ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!
+                    </li>
+                    <li data-ng-show="grid_info.column_name.$dirty && grid_info.column_name.$error.maxlength">Name can
+                      have maximum 50 characters!
+                    </li>
+                    <li data-ng-show="grid_info.column_name.$dirty && grid_info.column_name.$error.required">Name is
+                      required!
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-group col-md-9">
+                  <label for="column_label">Label: </label>
+                  <input type="text" class="form-control" id="column_label"
+                         data-ng-model="element_column.label"
+                         data-ng-change="setColumnLabel()">
+                </div>
+                <div class="form-group col-md-10">
+                  <label>Column width: </label>
+                  <div class="input-group">
+                    <input type="range" min="0" max="100"
+                           data-ng-model="element_column['width']"
+                           data-ng-change="resizeColumn()">
+                    <span>{{element_column.width}}</span>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h5 class="lead">Rows</h5>
+              <div class="btn-toolbar">
+                <button class="btn btn-default" data-ng-click="addRow()">Add Row</button>
+                <button class="btn btn-default" data-ng-click="removeRow()" data-ng-disabled="element_rows <= 2">Remove
+                  Row
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Boopathi -->
+      <div class="panel panel-default hidden" id="tab-panel">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#tab-properties">Tab Properties</a>
+          </h4>
+        </div>
+        <div class="panel-body" id="tab-properties">
+          <div class="tab-properties">
+            <h5 class="lead">Tabs</h5>
+            <form novalidate name="tab_info">
+              <select size="3" class="form-control list-box"
+                      data-ng-model="element_tab"
+                      data-ng-options="tab as tab.label for (id, tab) in element_tabs">
+              </select>
+              <div class="btn-group">
+                <div class="btn-toolbar">
+                  <button data-ng-click="addTab()">+</button>
+                  <button data-ng-click="removeTab()">-</button>
+                </div>
+                <div class="btn-toolbar">
+                  <button data-ng-click="moveTabUp()">Up</button>
+                  <button data-ng-click="moveTabDown()">Down</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-9">
+                  <label for="column_name">Name: </label>
+                  <input type="text" id="tab_name" class="form-control" data-ng-required="true"
+                         data-validator name-before-edit="{{element_tab.name}}"
+                         placeholder="Enter name" name="tab_name" data-ng-maxlength="50"
+                         data-ng-model-options="{allowInvalid: true}"
+                         data-ng-model="element_tab.name" data-ng-change="setTabName()">
+                  <ul class="error-msgs" data-ng-messages="tab_info.tab_name.$error"
+                      style="color: red;font-style: italic;">
+                    <li data-ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+                    <li data-ng-message="specialCharacterValidator">Special character except underscore,hyphen are not
+                      allowed!
+                    </li>
+                    <li data-ng-message="uniqueNameValidator">Name already taken!</li>
+                    <li data-ng-message="startAlphabetValidator">Name should start with an alphabet!</li>
+                    <li ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!
+                    </li>
+                    <li data-ng-show="tab_info.tab_name.$dirty && tab_info.tab_name.$error.maxlength">Name can have
+                      maximum 50 characters!
+                    </li>
+                    <li data-ng-show="tab_info.tab_name.$dirty && tab_info.tab_name.$error.required">Name is required!
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-group col-md-9">
+                  <label for="column_label">Label: </label>
+                  <input type="text" class="form-control" id="tab_label"
+                         data-ng-model="element_tab.label"
+                         data-ng-change="setTabLabel()">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Boopathi -->
+      <div class="panel panel-default hidden" id="accordion-panel">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#accordion-properties">Accordion Properties</a>
+          </h4>
+        </div>
+        <div class="panel-body" id="accordion-properties">
+          <div class="accordion-properties">
+            <h5 class="lead">Panels</h5>
+            <form novalidate name="accordion_info">
+              <select size="3" class="form-control list-box"
+                      data-ng-model="element_accordion_panel"
+                      data-ng-options="accordion as accordion.label for (id, accordion) in element_accordion">
+              </select>
+              <div class="btn-group">
+                <div class="btn-toolbar">
+                  <button data-ng-click="addPanel()">+</button>
+                  <button data-ng-click="removePanel()">-</button>
+                </div>
+                <div class="btn-toolbar">
+                  <button data-ng-click="moveAccordionUp()">Up</button>
+                  <button data-ng-click="moveAccordionDown()">Down</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-9">
+                  <label for="column_name">Name: </label>
+                  <input type="text" id="panel_name" class="form-control" data-ng-required="true"
+                         data-validator name-before-edit="{{element_accordion_panel.name}}"
+                         placeholder="Enter name" name="panel_name" data-ng-maxlength="50"
+                         data-ng-model-options="{allowInvalid: true}"
+                         data-ng-model="element_accordion_panel.name" data-ng-change="setAccordionPanelName()">
+                  <ul class="error-msgs" data-ng-messages="accordion_info.panel_name.$error"
+                      style="color: red;font-style: italic;">
+                    <li data-ng-message="whiteSpaceValidator">Whitespace not allowed!</li>
+                    <li data-ng-message="specialCharacterValidator">Special character except underscore,hyphen are not
+                      allowed!
+                    </li>
+                    <li data-ng-message="uniqueNameValidator">Name already taken!</li>
+                    <li data-ng-message="startAlphabetValidator">Name should start with an alphabet!</li>
+                    <li ng-message="restrictedNameValidator">This word is a reserved keyword.Please try another name!
+                    </li>
+                    <li data-ng-show="accordion_info.panel_name.$dirty && accordion_info.panel_name.$error.maxlength">
+                      Name can have maximum 50 characters!
+                    </li>
+                    <li data-ng-show="accordion_info.panel_name.$dirty && accordion_info.panel_name.$error.required">
+                      Name is required!
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-group col-md-9">
+                  <label for="column_label">Label: </label> <input type="text"
+                                                                   class="form-control" id="panel_label"
+                                                                   data-ng-model="element_accordion_panel.label"
+                                                                   data-ng-change="setAccordionPanelLabel()">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- End-->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#data_bindings">Data Bindings</a>
+          </h4>
+        </div>
+        <div class="panel-body" id="data_bindings">
+          <div class="data_bindings">
+            <form name="choose_noun_form" class="row" novalidate>
+              <div class="form-group col-md-9">
+                <label class="control-label">Choose noun type:</label>
+                <label class="form-radio none">
+                  <input type="radio" name="noun_type" value="none" data-ng-model="noun_type"
+                         data-ng-change="chooseNoun()">
+                  <span>None</span>
+                </label>
+                <label class="form-radio primary">
+                  <input type="radio" name="noun_type" value="primary" data-ng-model="noun_type"
+                         data-ng-change="chooseNoun()">
+                  <span>Primary Noun</span>
+                </label>
+                <label class="form-radio secondary">
+                  <input type="radio" name="noun_type" value="secondary" data-ng-model="noun_type"
+                         data-ng-change="chooseNoun()">
+                  <span>Secondary Nouns</span>
+                </label>
+              </div>
+            </form>
+
+            <form name="primary_noun_form" class="primary_noun_form" novalidate>
+              <div class="primary_noun row">
+                <div class="form-group col-md-9">
+                  <label>Noun name:</label>
+
+                  <p>{{primary_noun.label}}</p>
+                </div>
+
+                <div class="form-group col-md-9 grid-data">
+                  <label>Columns</label>
+                  <select class="form-control"
+                          data-ng-model="element_column"
+                          data-ng-options="column.label for column in element_columns"
+                          data-ng-change="chooseColumn()">
+                  </select>
+                </div>
+
+                <div class="form-group col-md-9">
+                  <label for="pn_attribute">Attributes:</label>
+                  <!--<select id="pn_attribute" class="form-control"-->
+                          <!--data-ng-model="pn_attribute"-->
+                          <!--data-ng-options="attr.label for attr in primary_noun.nounattributes track by attr.id"-->
+                          <!--data-ng-change="choosePnAttr()">-->
+                    <!--<option value="">None</option>-->
+                  <!--</select>-->
+                  <select id="pn_attribute" class="form-control"
+                          data-ng-change="choosePnAttr()"
+                          data-ng-model="pn_attribute_id">
+                    <option value="">None</option>
+                    <option data-ng-repeat="attr in primary_noun.nounattributes"
+                            value="{{attr.id}}"
+                            data-ng-selected="{{attr.id == pn_attribute_id}}">
+                      {{ (attr.label === 'Label' || attr.label === '') ? attr.name : attr.label }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="create_primary_noun form-group hidden">
+                <button class="btn btn-default" data-ng-click="createPrimaryNoun()">Create Primary Noun</button>
+              </div>
+            </form>
+
+            <form name="secondary_nouns_form" class="secondary_nouns_form" novalidate>
+              <div class="secondary_nouns row">
+                <div class="form-group col-md-9">
+                  <label for="secondary_noun">Noun names:</label>
+                  <select id="secondary_noun" class="form-control"
+                          data-ng-model="secondary_noun"
+                          data-ng-options="sn.label for sn in secondary_nouns track by sn.id">
+                    <option value="" disabled>Choose an option</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-9 grid-data">
+                  <label>Columns</label>
+                  <select class="form-control"
+                          data-ng-model="element_column"
+                          data-ng-options="column.label for column in element_columns"
+                          data-ng-change="chooseColumn()">
+                  </select>
+                </div>
+
+                <div class="form-group col-md-9">
+                  <label for="sn_attribute">Attributes:</label>
+                  <select id="sn_attribute" class="form-control"
+                          data-ng-model="sn_attribute"
+                          data-ng-options="attr.label for attr in secondary_noun.nounattributes track by attr.id"
+                          data-ng-change="chooseSnAttr()">
+                    <option value="">None</option>
+                  </select>
+                </div>
+              </div>
+              <div class="no_secondary_nouns_message form-group alert alert-info hidden">
+                <p>There are no secondary nouns</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#verb_bindings">Verb Bindings</a>
+          </h4>
+        </div>
+        <div class="panel-body" id="verb_bindings">
+          <div class="verb_bindings">
+            <p class="lead">{{element_type}}</p>
+            <table class="table table-bordered table-hover">
+              <caption>Choose an event and bind it to a function.</caption>
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Verb</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <select class="form-control"
+                            data-ng-model="event"
+                            data-ng-options="label for (key, label) in events"
+                            data-ng-change="chooseEvent()">
+                      <option value="" disabled>Choose an event</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-control"
+                            data-ng-model="verb"
+                            data-ng-options="verb.label for verb in verbs track by verb.id "
+                            data-ng-change="chooseVerb()">
+                      <option value="">None</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="btn-toolbar hidden" id="verb_info">
+              <select class="form-control"
+                      data-ng-model="extra_verb_info"
+                      data-ng-options="scr.id as scr.name for scr in screens | filter:scr.client_device_type='pc'"
+                      data-ng-change="chooseTargetScreen()">
+                <option value="" disabled>select target screen</option>
+              </select>
+            </div>
+            <div class="btn-toolbar">
+              <button class="btn btn-link add_event" data-ng-click="addEvent()">add event</button>
+            </div>
+            <div class="btn-toolbar bpmn-diagram">
+              <a href="bpmn.html" class="btn btn-default" target="_blank">Take a look at BPMN diagram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-toolbar delete">
+      <button class="btn btn-default">Delete</button>
+      or <kbd><kbd>shift</kbd> + <kbd>backspace</kbd></kbd>
+    </div>
+    <div class="btn-toolbar">
+      <button class="btn btn-primary submit" data-ng-disabled="element_info.element_url.$invalid">{{submit}}</button>
+      <button class="btn btn-default cancel">Cancel</button>
+    </div>
+  </div>
+</div>

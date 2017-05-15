@@ -1,0 +1,8 @@
+<div ng-init="showLabel=true; showText=false">
+	<label ng-show="showLabel && (!input || input==null || input.length==0 || input==' ')" style="min-width: 150px;"
+		ng-click="showText=true; showLabel=false">Click Here to Edit</label>
+	<label ng-bind="input" ng-show="showLabel && input && (input.length!=0 && input!=' ')" style="min-width: 150px;"
+		ng-click="showText=true; showLabel=false"></label> <input
+		ng-model="input" ng-show="showText" style="min-width: 150px;"
+		ng-mouseleave="showLabel=true; showText=false">
+</div>

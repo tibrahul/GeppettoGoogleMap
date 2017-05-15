@@ -1,0 +1,31 @@
+<div class="project">
+  <div class="modal-header">
+    <h3 class="modal-title lead">Select</h3>
+  </div>
+  <div class="modal-body">
+  <span style="font-weight:italic;text-align: center;color: red;">{{errormessage}}</span>
+  	<br>
+    <label for="primary">Select Nouns Types</label> <select
+            data-ng-model="modalData.noun.selectedId" class="form-control"
+            data-ng-options="opt.name for opt in modalData.nounlist track by opt.id"
+            >
+            <option value="">---Select---</option>
+          </select>
+    <br>
+    <div ng-show="modalData.stdlist.length>0">
+	<span style="font-weight:bold;text-align: center"><label>OR</label></span>
+	<br>
+	<br>
+    <label  for="primary">Select Standard Types </label> <select
+            data-ng-model="modalData.std.selectedId" class="form-control"
+            data-ng-options="opt.subtype for opt in modalData.stdlist track by opt.id"
+            >
+            <option value="">---Select---</option>
+          </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn success" data-ng-click="ok()">OK</button>
+    <button class="btn btn-default" data-ng-click="close()">Cancel</button>
+  </div>
+</div>

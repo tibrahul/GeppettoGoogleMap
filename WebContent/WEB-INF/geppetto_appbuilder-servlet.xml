@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.npb.gp" />
+	<resources mapping="/**" location="/" />
+	<default-servlet-handler />
+	<annotation-driven />
+
+	<context:property-placeholder location="/WEB-INF/resources/jdbc.properties"
+		order="1" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpTechPropertiesDao_SQL.properties"
+		order="2" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpScreenDao_SQL.properties"
+		order="3" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpProjectDao_SQL.properties"
+		order="4" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpActivityDao_SQL.properties"
+		order="5" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpNounDao_SQL.properties"
+		order="6" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpUserDao_SQL.properties"
+		order="7" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpVerbsDao_SQL.properties"
+		order="8" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpMobileDeviceTypeDao_SQL.properties"
+		order="10" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpFlowControlDao_SQL.properties"
+		order="11" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpLanguageDao_SQL.properties"
+		order="12" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpJobDao_SQL.properties"
+		order="13" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpMenuBuilderDao_SQL.properties"
+		order="14" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpMicroFlowDao_SQL.properties"
+		order="15" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpAuthorityDao_SQL.properties"
+		order="16" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpModuleDao_SQL.properties"
+		order="17" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpKeyGenDao_SQL.properties"
+		order="18" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpTemplateDao_SQL.properties"
+		order="19" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpTemplateComponentDao_SQL.properties"
+		order="20" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpProjectTemplateDao_SQL.properties"
+		order="21" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpProjectTemplateComponentDao_SQL.properties"
+		order="22" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpNewUsersDao_SQL.properties"
+		order="23" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpWizardDao_SQL.properties"
+		order="24" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpDockerDownloadRequests_SQL.properties"
+		order="25" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpMicroServiceDao_SQL.properties"
+		order="26" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpUser_Mac_SQL.properties"
+		order="27" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpApplicationDao_SQL.properties"
+		order="28" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpConfigsDao_SQL.properties"
+		order="29" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpButtonGroupDao_SQL.properties"
+		order="30" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpOrganization.properties"
+		order="31" ignore-unresolvable="true" />
+	<context:property-placeholder
+		location="/WEB-INF/resources/sql_queries/GpWSDL_SQL.properties"
+		order="32" ignore-unresolvable="true" />
+
+	<beans:bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jsonMessageConverter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<!-- User service for spring security -->
+
+	<beans:bean id="GpUserServiceDetails" class="com.npb.gp.services.GpUserService" />
+
+	<!-- Social User spring security -->
+	<beans:bean id="socialAuthenticationFilter"
+		class="com.npb.gp.social.GpSocialAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:constructor-arg value="/j_spring_social_security_check" />
+	</beans:bean>
+	<beans:bean id="authenticationProvider"
+		class="com.npb.gp.social.GpSocialAuthenticationProvider">
+		<beans:property name="roles" value="ROLE_USER" />
+	</beans:bean>
+
+	<!-- End Social User spring security -->
+
+	<!-- Login page security ! login page should not have any security. -->
+	<security:http security="none" pattern="/login"></security:http>
+	<!-- Spring security login page & rest of controllers authentication -->
+	<security:http auto-config="true">
+		<security:access-denied-handler
+			error-page="/login/accessDenied/" />
+		<security:intercept-url pattern="/activity/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/android/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/flowcontrol/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/ios/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/job/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/keygen/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/language/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/menubuilder/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/devicetypes/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/module/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/noun/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/pc/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/project/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/techproperties/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:intercept-url pattern="/verb/**"
+			access="ROLE_ADMIN,ROLE_USER" />
+		<security:form-login authentication-failure-url="/login/loginFailure/"
+			always-use-default-target="true" login-page="/index.html"
+			default-target-url="/login/loginSuccess/" />
+		<security:logout logout-success-url="/login/logout/"
+			delete-cookies="JSESSIONID" invalidate-session="true" />
+		<!-- social -->
+		<security:custom-filter before="FORM_LOGIN_FILTER"
+			ref="socialAuthenticationFilter" />
+	</security:http>
+
+	<!-- Auth Manager for spring security user service -->
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider
+			user-service-ref="GpUserServiceDetails">
+		</security:authentication-provider>
+		<!-- social -->
+		<security:authentication-provider
+			ref="authenticationProvider" />
+		<!-- END social -->
+	</security:authentication-manager>
+
+	<beans:bean id="jsonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</beans:bean>
+
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<beans:property name="driverClassName">
+			<beans:value>${jdbc.driverClassName}</beans:value>
+		</beans:property>
+		<beans:property name="url">
+			<beans:value>${jdbc.url}</beans:value>
+		</beans:property>
+		<beans:property name="username">
+			<beans:value>${jdbc.username}</beans:value>
+		</beans:property>
+		<beans:property name="password">
+			<beans:value>${jdbc.password}</beans:value>
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>

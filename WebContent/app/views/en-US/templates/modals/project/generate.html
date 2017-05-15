@@ -1,0 +1,59 @@
+<div class="project" data-ng-init="updategeneratemodal()">
+    <div class="modal-header">
+        <h3 class="modal-title lead">{{modalData.generatemessage_title}}</h3>
+    </div>
+    <div class="modal-body">
+        <form class="delete">
+            <div class="form-group"></div>
+            <div id="status" style="text-transform: capitalize;" class="alert alert-info"><strong>{{modalData.generatemessage}}</strong>
+            <i style="float: right;font-size:100 px" data-ng-show="modalData.spinner" class="fa fa-spinner fa-spin"  aria-hidden="true"  ></i>
+            </div>
+            
+           <!--  <div ng-show="modalData.DesktopApp" class="alert alert-danger">
+            	Click <a href="{{modalData.AppDesktopLink}}"  target="_blank">here</a> to see your desktop application deployed
+            </div> -->
+            <!-- Dhinakar -->
+             <div ng-show="modalData.desktopContainerComeUp" class="alert alert-info">
+             	Click <a href="{{modalData.desktopContainerComeUpMsg}}" target="_blank">here</a> to see your desktop application deployed in Docker
+             </div>
+             <div ng-show="modalData.container_fail" class="alert alert-danger">
+            	Click <a href="{{modalData.container_fail_message}}"  target="_blank">here</a> Desktop application deployed, But please try after some time
+            </div>
+            <div ng-show="modalData.gitCheck" class="alert alert-info">
+             	Click <a href="{{modalData.gitUrl}}" target="_blank">here</a> to see the GitHub Repository
+            </div>
+            
+             <div ng-show="modalData.ionic_finished" class="alert alert-info">
+             	 <p >{{modalData.ionic_finished_message}} </p> 
+            </div>
+            <div ng-show="logincreds" class="alert alert-info">
+				<div class="container">
+					<p>click the button to see login credentials for generated application</p>
+					<button type="button" class="btn btn-info" data-toggle="collapse"
+						data-target="#demo">Login Credentials</button>
+					<div id="demo" class="collapse">
+						<h5><b>For Admin_Role User</b></h5>
+						<p>Username : admin</p>
+						<p>Password :12345</p>
+						<h5><b>For User_Role user</b></h5>
+						<p>Username: test</p>
+						<p>Password: 12345</p>
+					</div>
+				</div>
+			</div>
+            <!--  
+            <button ng-show="modalData.generationDone" ng-click="requestDownloadDockerContainers()" id="btn-dockerDC">
+             	Request download of docker containers
+            </button>
+            -->
+            <div class="alert alert-danger" ng-show="modalData.showerrors">
+            	<ul class="list-group">
+			        <li class="list-group-item" ng-repeat="error in generation_errors">{{error.stack_trace}}</li>
+		      	</ul>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer" data-ng-controller="ProjectCtrl">
+		<button class="btn btn-default" ng-disabled="toggleFinishBtn" data-ng-click="finish()">Finish</button>
+    </div>
+</div>

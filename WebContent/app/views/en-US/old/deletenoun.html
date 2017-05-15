@@ -1,0 +1,136 @@
+<div ng-controller="DeleteNounController as dctrl">
+	<form name="deletenounForm" ng-submit="deleteNoun()">
+		<div class="panel panel-default">
+			<div class="panel panel-success"
+				style="padding: 9px 12px; font-size: 15px; background-color: rgb(197, 194, 194); border-color: rgb(197, 194, 194);">Manage
+				Noun</div>
+			<div class="panel-body">
+				<div class="panel panel-default">
+					<div class="panel panel-success"
+						style="padding: 9px 12px; font-size: 15px; background-color: #DDD; border-color: rgb(197, 194, 194);">Required
+						Information</div>
+					<div class="panel-body">
+						<div class="container">
+							<div class="copyMargin">
+								<div class="row">
+									<div class="form-group col-md-6">
+										<div class="col-md-5">
+											<label class="control-label modifedFormControl"
+												for="description"><strong>Select Noun::</strong></label>
+										</div>
+										<div class="col-md-7">
+											<select class="full-width" name="copy"
+												data-init-plugin="select2" title="Copp noun properties from"
+												autofocus="autofocus" required="required"
+												ng-model="nounData"
+												style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+												ng-options="type as type.label for type in allNounProject">
+												<option value="">---Select---</option>
+												<!-- <option value="">Private</option> -->
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-show="nounData">
+							<h4>Properties :</h4>
+							<div class="tableLike">
+								<div class="tableLikeHeading">
+									<div class="col" style="padding: 9px 12px;">Name</div>
+									<div class="col">Label</div>
+									<div class="col">Type</div>
+									<div class="col">Modfier</div>
+									<div class="col">Description</div>
+									<div class="col">Unique</div>
+								</div>
+								<div class="table-row hover" ng-click="delRow(nounAttributes)"
+									ng-repeat="nounAttributes in nounvalues.nounattributes track by $index">
+									<div class="col">{{nounAttributes.name}}</div>
+									<div class="col">{{nounAttributes.label}}</div>
+
+									<div class="col">{{nounAttributes.subtype}}</div>
+									<div class="col">{{nounAttributes.subtypemodifiervalue}}</div>
+									<div class="col">{{nounAttributes.description}}</div>
+									<div class="col">
+										<div class="check-primary">
+											<input type="checkbox"
+												ng-checked="nounAttributes.ispart_of_unique_key"
+												ng-model="nounAttributes.ispart_of_unique_key">
+										</div>
+									</div>
+								</div>
+							</div>
+							<h4>Relationships :</h4>
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<div class="row">
+												<div class="checkbox check-primary">
+													<input type="checkbox" value="4" id="checkbox4"
+														ng-model="isNone" checked="checked" ng-disabled="true">
+													<label for="checkbox4">none</label>
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="checkbox check-primary col-md-5">
+													<input type="checkbox" value="5" id="checkbox5"
+														ng-checked="parentOf" ng-disabled="true"> <label
+														for="checkbox5">Parent of</label>
+												</div>
+												<div class="col-md-7">
+													<select class="full-width hover" name="copy"
+														data-init-plugin="select2"
+														title="Copp noun properties from" autofocus="autofocus"
+														style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+														ng-model="noun.parents"
+														ng-options="parent as parent.label for parent in allNounProject">
+														<option value="">---Select---</option>
+													</select>
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="checkbox check-primary col-md-5">
+													<input type="checkbox" value="6" id="checkbox6"
+														ng-checked="childOf" ng-disabled="true"> <label
+														for="checkbox6">child of</label>
+												</div>
+												<div class="col-md-7">
+													<select class="full-width hover" name="copy"
+														data-init-plugin="select2"
+														title="Copp noun properties from" autofocus="autofocus"
+														style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+														ng-model="noun.children"
+														ng-options="child as child.label for child in allNounProject">
+														<option value="">---Select---</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<div class="checkbox check-primary">
+											<input type="checkbox" id="checkbox7"
+												ng-model="nounvalues.cacheable"> <label
+												for="checkbox7">cache enabled</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row form-group" align="center"
+				style="margin-left: 0px; margin-right: 0px;">
+				<button class="btn btn-complete btn-cons" type="submit"
+					ng-disabled="!nounData">Delete</button>
+				<button class="btn btn-warning btn-cons" type="reset">Cancel</button>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,603 @@
+<!--
+Date Created: March 09 2016
+@author Thamizhmani
+I created a new accordian group in accordian named System Activities.
+-->
+
+<header class="user" style="width: 2200px;"
+	data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="project">
+	<h1 class="title">Manage Project</h1>
+	<tabset class="tabs"> <tab heading="General Information"
+		active="tabprojectactive">
+	<div class="general">
+		<form class="properties" name="myForm">
+			<div class="item">
+				<label for="name">Name</label> <input type="text" name="name"
+					class="form-control" id="name" placeholder="Enter name"
+					data-ng-model="project.projectName" data-ng-required="true"
+					validator name-before-edit="{{json.name}}" name-type="project"
+					project-id="{{json.id}}" data-ng-maxlength="50">
+				<ul class="error-msgs" data-ng-messages="myForm.name.$error"
+					style="color: red; font-style: italic;">
+					<li data-ng-message="whiteSpaceValidator">Whitespace not
+						allowed!</li>
+					<li data-ng-message="specialCharacterValidator">Special
+						characters except underscore & hyphen, are not allowed!</li>
+					<li data-ng-message="uniqueNameValidator">Name already taken!</li>
+					<li data-ng-message="startAlphabetValidator">Name should start
+						with an alphabet!</li>
+					<li data-ng-message="restrictedNameValidator">This word is a
+						reserved keyword.Please try another name!</li>
+					<li
+						data-ng-show="myForm.name.$dirty && myForm.name.$error.maxlength">Name
+						can have maximum 50 characters!</li>
+					<li
+						data-ng-show="myForm.name.$dirty && myForm.name.$error.required">Name
+						is required!</li>
+				</ul>
+			</div>
+			<div class="item">
+				<label for="label">Label</label> <input type="text"
+					class="form-control" id="label" placeholder="Enter label"
+					data-ng-model="project.projectLabel">
+			</div>
+			<div class="item">
+				<div class="form-group">
+					<label for="entity">Entity / Company</label> <input type="text"
+						class="form-control" placeholder="Enter entity / company"
+						id="entity" name="entity" data-ng-model="project.projectCompany"
+						data-ng-required="true" validator
+						name-before-edit="{{json.entity}}" project-id="{{json.id}}"
+						name-type="entity">
+					<ul class="error-msgs" data-ng-messages="myForm.entity.$error"
+						style="color: red; font-style: italic;">
+						<li data-ng-message="whiteSpaceValidator">Whitespace not
+							allowed!</li>
+						<li data-ng-message="no_specialCharacterValidator">No Special
+							characters are not allowed!</li>
+						<li data-ng-message="startValidator">Entity / Company should
+							start with an alphabet!</li>
+						<li
+							data-ng-show="myForm.entity.$dirty && myForm.entity.$error.required">Name
+							is required!</li>
+					</ul>
+				</div>
+			</div>
+			<div class="item">
+				<label for="primary">Primary Language</label> <select
+					data-ng-model="project.mainLanguage" class="form-control"
+					data-ng-options="opt.name for opt in mainLanguages track by opt.id"
+					data-ng-change="additionalLanguageDropdown(project.mainLanguage.name)">
+					<option value="0" selected="selected">Primary Language</option>
+				</select>
+
+			</div>
+			<div class="item">
+				<label for="secondary">Secondary Languages</label>
+				<div data-ng-dropdown-multiselect="" options="additionalLanguages"
+					selected-model="selectedadditionallanguage"
+					extra-settings="multiselectsettings"></div>
+			</div>
+			<div class="item">
+				<label for="description">Description</label> <input type="text"
+					class="form-control" id="description"
+					placeholder="Enter description"
+					data-ng-model="project.projectDescription">
+			</div>
+			<!-- 	<div class="item">
+                <label>Type</label>
+                <div class="type">
+                  <label class="form-checkbox">
+                    <input type="checkbox" checked>
+                    <span>Desktop / Laptop</span>
+                  </label>
+                  <label class="form-checkbox">
+                    <input type="checkbox" checked>
+                    <span>Mobile</span>
+                  </label>
+                </div>
+              </div> -->
+		</form>
+		<hr>
+		<div class="action">
+			<button class="btn complete" style="width: 13%;"
+				data-ng-click="openGenerateModal()">Generate</button>
+		</div>
+		<hr>
+		<div class="action">
+			<button class="btn complete"
+				data-ng-disabled="myForm.name.$invalid || myForm.name.$pending || myForm.entity.$invalid"
+				data-ng-click="submitProject()" data-ng-show="showcreate">
+				Save</button>
+			<button class="btn complete"
+				data-ng-disabled="myForm.name.$invalid || myForm.name.$pending || myForm.entity.$invalid || myForm.entity.$pending"
+				data-ng-click="updateProject()" data-ng-show="!showcreate">
+				Save</button>
+			<button class="btn danger"
+				data-ng-click="openDeleteDialog('sm',json.id)">Delete</button>
+		</div>
+		<br>
+		<accordion> <accordion-group
+			heading="Technical Architecture" class="architecture">
+		<form>
+			<div class="client">
+				<h3 class="title">Client Properties</h3>
+				<div class="item">
+					<label for="client-dev-lang">Client Development Languages</label> <select
+						class="form-control" data-ng-model="selectedclientdevlanguage"
+						data-ng-options="opt.label for opt in clientdevlanguage track by opt.id"></select>
+				</div>
+				<div class="item">
+					<label for="client-dev-frame">Client Development Frameworks</label>
+					<select class="form-control"
+						data-ng-model="selectedclientdevframework"
+						ng-change="test(selectedclientdevframework)"
+						data-ng-options="cdf.label for cdf in clientdevframework track by cdf.id"></select>
+				</div>
+				<div class="item">
+					<label for="client-dev-css">Client Desktop CSS Framework</label> <select
+						class="form-control" data-ng-model="project.desktopCssFramework"
+						data-ng-options="cdc.label for cdc in desktopCssFrameworks track by cdc.id"></select>
+				</div>
+				<div class="item">
+					<label for="client-dev-css">Client Mobile CSS Framework</label> <select
+						class="form-control" data-ng-model="project.mobileCssFramework"
+						data-ng-options="cdc.label for cdc in mobileCssFrameworks track by cdc.id"></select>
+				</div>
+				<!--
+				<div class="item">
+					<label for="client-os">Client OS</label>
+					<div data-ng-dropdown-multiselect="" options="clientOS"
+						selected-model="selectedClientOS"
+						extra-settings="multiselectsettings"></div>
+				</div>
+				 
+				<div class="item">
+					<label for="device-types">Device Types</label>
+					<div data-ng-dropdown-multiselect="" options="clientDeviceTypes"
+						selected-model="selectedclientdevicetypes"
+						extra-settings="multiselectsettings"></div>
+				</div>
+				 
+				<div class="item">
+					<label for="supported-browsers">Supported Browsers</label>
+					<div data-ng-dropdown-multiselect="" options="browsers"
+						selected-model="selectedbrowsers"
+						extra-settings="multiselectsettings"></div>
+				</div>
+				<div class="item">
+					<label>Mobile Only</label>
+					<div class="mobile-only">
+						<label>Stand Alone</label> <label class="form-radio"> <input
+							type="radio" data-ng-value="true"
+							data-ng-model="project.stand_alone_app"> <span>Yes</span>
+						</label> <label class="form-radio"> <input type="radio"
+							data-ng-value="false" data-ng-model="project.stand_alone_app">
+							<span>No</span>
+						</label>
+					</div>
+				</div>
+				-->
+			</div>
+			<div class="server">
+				<h3 class="title">Server Properties</h3>
+				<div class="item">
+					<label for="server-run-env">Server Runtime Environment</label> <select
+						data-ng-model="project.serverRunTime" class="form-control"
+						data-ng-options="opt.name for opt in serverRunTimes track by opt.id"></select>
+				</div>
+				<div class="item">
+					<label for="server-os">Server OS</label> <select
+						data-ng-model="project.serverOs" class="form-control"
+						data-ng-options="opt.name for opt in serverOS track by opt.id"></select>
+				</div>
+				<div class="item">
+					<label for="server-dev-lang">Server Development Language</label> <select
+						class="form-control"
+						data-ng-model="project.serverDevelopmentLanguage"
+						data-ng-options="opt.name for opt in serverLanguages track by opt.id"></select>
+				</div>
+				<div class="item">
+					<label for="database">Database</label> <select class="form-control"
+						data-ng-model="project.serverDbms"
+						data-ng-options="opt.name for opt in serverDBMS track by opt.id"></select>
+				</div>
+				<div class="item">
+					<label for="server-dev-frame">Server Development Framework</label>
+					<select class="form-control"
+						data-ng-model="project.serverDevelopmentFramework"
+						data-ng-options="opt.name for opt in serverDevFramework track by opt.id"></select>
+				</div>
+			</div>
+			<div class="miscellaneous">
+				<h3 class="title">Miscellaneous</h3>
+				<div class="item">
+					<label>Communication Protocol</label>
+					<div class="protocol">
+						<label class="form-radio"> <input id="sec" type="radio"
+							name="Protocal" data-ng-value="true"
+							data-ng-model="project.communication_protocal"> <span>Secured</span>
+						</label> <label class="form-radio"> <input id="non-sec"
+							type="radio" name="Protocal" data-ng-value="false"
+							data-ng-model="project.communication_protocal"> <span>Non-Secured</span>
+						</label>
+					</div>
+				</div>
+				<div class="item">
+					<label for="default-mod-labels">Default Module Labels</label> <input
+						type="text" class="form-control" id="default-mod-labels"
+						placeholder="Enter default module labels"
+						data-ng-model="project.default_module_label">
+				</div>
+
+				<div class="item">
+					<label>Application Type</label> <select
+						data-ng-model="project.application_type" class="form-control"
+						data-ng-options="opt.name for opt in Apptype track by opt.id"></select>
+				</div>
+				<br>
+				<div class="item">
+					<h3 class="title">LotusNotes Database</h3>
+					<div class="protocol">
+						<label class="form-radio"> <input id="sec" type="radio"
+							ng-value="true" ng-model="project.lotus_notes_enabled"> <span>Enable</span>
+						</label> <label class="form-radio"> <input id="sec" type="radio"
+							ng-value="false" ng-model="project.lotus_notes_enabled">
+							<span>Disable</span>
+						</label>
+					</div>
+					<div ng-show="project.lotus_notes_enabled">
+						<label>Give Datasource Connectivity</label> <input
+							ng-model="project.extra_project_info.mongo.url" type="text"
+							class="form-control" id="label" placeholder="host"> <input
+							ng-model="project.extra_project_info.mongo.port" type="text"
+							class="form-control" id="label" placeholder="port"> <input
+							ng-model="project.extra_project_info.mongo.db_name" type="text"
+							class="form-control" id="label" placeholder="Database Name">
+						<div class="protocol">
+							<label> MongoDB Credentials ?</label> <label class="form-radio">
+								<input id="sec" type="radio" ng-value="true"
+								ng-model="project.lotus_notes_cred_enabled"> <span>Yes</span>
+							</label> <label class="form-radio"> <input id="sec" type="radio"
+								ng-value="false" ng-model="project.lotus_notes_cred_enabled">
+								<span>No</span>
+							</label>
+						</div>
+						<div ng-show="project.lotus_notes_cred_enabled">
+							<input ng-model="project.extra_project_info.cred.username"
+								type="text" class="form-control" id="label"
+								placeholder="DB_Username"> <input
+								ng-model="project.extra_project_info.cred.password" type="text"
+								class="form-control" id="label" placeholder="DB_passwd">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		</accordion-group> <accordion-group heading="Documentation" class="docs">
+		<textarea data-ck-editor data-ng-model="project.projectNotes"></textarea>
+		</accordion-group> </accordion>
+		<div class="action">
+			<button class="btn complete"
+				data-ng-disabled="myForm.name.$invalid || myForm.name.$pending || myForm.entity.$invalid"
+				data-ng-click="submitProject()" data-ng-show="showcreate">Save
+			</button>
+			<button class="btn complete"
+				data-ng-disabled="myForm.name.$invalid || myForm.name.$pending || myForm.entity.$invalid"
+				data-ng-click="updateProject()" data-ng-show="!showcreate">Update
+			</button>
+			<button class="btn danger"
+				data-ng-click="openDeleteDialog('sm',json.id)">Delete</button>
+		</div>
+	</div>
+	</tab> <tab heading="Noun Design" active="tabnounactive"
+		select="currentTab()"> <accordion> <accordion-group
+		heading="User Nouns" is-open="true" class="user-nouns">
+	<div class="nouns">
+		<button class="btn complete add"
+			data-ng-click="openModal('create','noun','sm');">
+			<i class="fa fa-plus-circle"></i> <span>Add</span>
+		</button>
+		<br>
+		<ul data-ng-if="nouns.length">
+			<li data-ng-repeat="n in nouns">
+				<h3 class="title lead">{{n.name}}</h3>
+				<h4 class="label">{{n.label}}</h4>
+				<p class="description">{{n.description}}</p>
+				<div class="action">
+					<button class="btn success edit" data-ng-click="updateNoun(n)">
+						<i class="fa fa-pencil-square-o"></i> <span>Edit</span>
+					</button>
+					<button class="btn danger delete"
+						data-ng-click="setDeleteNounObj(n); openModal('delete', 'noun', 'sm');">
+						<i class="fa fa-trash-o"></i> <span>Delete</span>
+					</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</accordion-group> <accordion-group heading="Import Noun" class="other-nouns">
+	<div class="nouns">
+	<div class="form-group">
+	</div>
+		<!-- <label>Select the DB to import noun</label>
+			<select class="form-control" style="width: 500px; height: 35px;"  data-ng-change = "valuechange(value)">
+				<option value="">---Select DB ---</option>
+				<option value="MongoDB">MongoDB</option>
+				<option value="CouchBase">CouchBase</option>
+			</select>
+			<br> -->
+		<button class="btn complete add" ng-disabled="isDisabled"
+			data-ng-click="import_other_noun()">
+			<i class="fa fa-plus-circle"></i> <span>Import Database</span>
+		</button>
+		<br>
+
+		<!-- <div class="form-group">
+  <label for="usr">Add WSDL Link:</label>
+  <input type="text" class="form-control" id="usr">
+  <button class="btn complete add" data-ng-click="addWsdlLink()">
+			<i class="fa fa-plus-circle"></i> <span>Add</span>
+		</button>
+</div> -->
+		<!-- <br> -->
+		<!-- <div data-ng-if="other_nouns.length">
+			<select class="form-control" style="width: 500px; height: 35px;"
+				ng-model="SelectedDb" ng-change="get_mongo_noun(SelectedDb)"
+				data-ng-options="one_noun.db_name for one_noun in other_nouns">
+				<option value="">---Select Source---</option>
+			</select>
+		</div> -->
+		<div data-ng-if="other_nouns.length">
+
+			<form class="form-inline">
+				<div data-ng-if=true>
+					<div class="form-group"
+						style="width: 250px; height: 35px; margin-left: 44px">
+						<label for="label">Bucket</label>
+					</div>
+					<div class="form-group"
+						style="width: 250px; height: 35px; margin-left: 44px">
+						<label for="description">Design Document</label>
+					</div>
+					<div class="form-group"
+						style="width: 250px; height: 35px; margin-left: 44px">
+						<label for="description">Views</label>
+					</div>
+				</div>
+			</form>
+			<form class="form-inline">
+				<div data-ng-if=true>
+					<div class="form-group">
+
+						<select class="form-control"
+							style="width: 250px; height: 35px; margin-left: 44px"
+							ng-model="SelectedDb" ng-change="get_couch_noun(SelectedDb)"
+							data-ng-options="one_noun.bucket for one_noun in other_nouns">
+							<option value="">---Select Source---</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select class="form-control"
+							style="width: 250px; height: 35px; margin-left: 44px"
+							ng-model="Selecteddesign"
+							ng-change="get_couch_design(Selecteddesign)"
+							data-ng-options="one_noun.design for one_noun in couch_desing">
+							<option value="">---Select Source---</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select class="form-control"
+							style="width: 250px; height: 35px; margin-left: 44px"
+							ng-model="Selectedviews"
+							ng-change="get_couch_views(Selectedviews)"
+							data-ng-options="one_noun.views for one_noun in couch_views">
+
+							<option value="">---Select Source---</option>
+						</select>
+
+
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--  <button class="btn complete add" style: data-ng-click="view_import_other_noun()">
+              <i class="fa fa-plus-circle"></i>
+              <span>View Imported Noun</span>
+          </button> -->
+
+		<ul data-ng-if="list_of_mongo_nouns.length">
+			<li data-ng-repeat="n in list_of_mongo_nouns">
+				<h3 class="title lead">{{n.bucket}}</h3>
+				<h3 class="label">attributes of {{n.views}}</h3>
+
+				<div class="action">
+
+					<button class="btn complete add" data-ng-click="addDefaultNoun(n)">
+						<i class="fa fa-plus-circle"></i> <span>Add Nouns to
+							project</span>
+					</button>
+				</div>
+			</li>
+		</ul>
+
+	</div>
+	</accordion-group> <!-- WSDL endpoint  --> <accordion-group heading="WSDL" class="wsdl">
+	<form class="form-inline" name="myForm">
+  <div class="form-group">
+			<label >Add WsdL Link's</label> <input
+				id="msg" type="text" class="form-control" name="msg"
+				data-ng-model="link.wsdl_endpoint" placeholder="Link ...,">
+			<button class="btn complete add"
+				data-ng-click="addWsdlLink(link.wsdl_endpoint)"
+				data-ng-disabled="!myForm.msg.$valid">
+				<i class="fa fa-plus-circle"></i> <span>Save</span>
+			</button>
+		</div>
+	</form>
+	<div class="nouns">
+	<form class="form-inline">
+	<button class="btn complete add" 
+			data-ng-click="noun_wsdl()">
+			<i class="fa fa-plus-circle"></i> <span>Import Nouns From WSDL</span>
+		</button>
+		</form>
+	<br>
+	<div data-ng-if="wsdlname.length">
+
+			<form class="form-inline">
+				<div data-ng-if=true>
+					<div class="form-group"
+						style="width: 250px; height: 35px; margin-left: 44px">
+						<label for="description">WSDL</label>
+					</div>
+				</div>
+			</form>
+			<form class="form-inline">
+				<div data-ng-if=true>
+					<div class="form-group">
+						<select class="form-control"
+							style="width: 250px; height: 35px; margin-left: 44px"
+							ng-model="SelectedWSDL"
+							ng-change="get_class(SelectedWSDL)"
+							data-ng-options="wsdl.wsdl_name for wsdl in wsdlname">
+
+							<option value="">---Select Source---</option>
+						</select>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<ul data-ng-if="classname.length">
+			<li data-ng-repeat="n in classname">
+				<h3 class="title lead">{{n.class_name}}</h3>
+				<h3 class="label">attributes of {{n.class_name}}</h3>
+
+				<div class="action">
+
+					<button class="btn complete add" data-ng-click="addwsdlNoun(n)">
+						<i class="fa fa-plus-circle"></i> <span>Add Nouns to
+							project</span>
+					</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</accordion-group> <!-- Rest API endpoint  --> <accordion-group
+		heading="RestAPI-Endpoint">
+
+	<form name="myForm1">
+		<div class="input-group">
+			<span class="input-group-addon">Add RestEndPoint Link's</span> <input
+				id="msg" type="text" class="form-control" name="msg"
+				data-ng-model="restlink.rest_endpoint" placeholder="Link ...,"
+				style="width: 500px; height: 35px;" required>
+			<button class="btn complete add"
+				data-ng-click="addrestLink(restlink.rest_endpoint)"
+				data-ng-disabled="!myForm1.msg.$valid" style="margin-left: 510px;">
+				<i class="fa fa-plus-circle"></i> <span>Save</span>
+			</button>
+		</div>
+	</form>
+
+	</accordion-group> </accordion> </tab> <tab heading="Activity Design" active="tabactivityactive"
+		select="currentTab()"> <accordion> <accordion-group
+		heading="User Activities" is-open="true" class="user-activities">
+	<div class="activities">
+		<button class="btn complete add"
+			data-ng-click="openModal('create','activity','sm');">
+			<i class="fa fa-plus-circle"></i> <span>Add</span>
+		</button>
+		<ul data-ng-if="activities.length">
+			<li data-ng-repeat="a in activities">
+				<h3 class="title lead">{{a.name}}</h3>
+				<h4 class="label">{{a.label}}</h4>
+				<p class="description">{{a.description}}</p>
+				<!--  -->
+				<div class="action">
+					<button class="btn success edit"
+						data-ng-show="a.module_type != 'not_default'"
+						data-ng-click="updateActivity(a.id,a.name)">
+						<i class="fa fa-pencil-square-o"></i> <span>Edit</span>
+					</button>
+					<button class="btn danger delete"
+						data-ng-click="setDeleteActivityObj(a); openModal('delete','activity','sm');">
+						<i class="fa fa-trash-o"></i> <span>Delete</span>
+					</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</accordion-group> <accordion-group heading="System Activities">
+	<p>System Activities</p>
+	<div class="activities">
+		<ul data-ng-if="predefined_activities_system.length">
+			<li data-ng-repeat="a in predefined_activities_system">
+				<h3 class="title lead">{{a.name}}</h3>
+				<h4 class="label">{{a.label}}</h4>
+				<p class="description">{{a.description}}</p>
+				<div class="action">
+					<button class="btn complete add"
+						data-ng-disabled="!a.activity_visibility"
+						data-ng-click="addModule(a,json.id)">
+						<i class="fa fa-plus-circle"></i> <span>Add to my project</span>
+					</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</accordion-group> <accordion-group heading="Other Activities" class="other-activities">
+	<div class="activities">
+		<ul data-ng-if="predefined_activities_other.length">
+			<li data-ng-repeat="a in predefined_activities_other">
+				<h3 class="title lead">{{a.name}}</h3>
+				<h4 class="label">{{a.label}}</h4>
+				<p class="description">{{a.description}}</p>
+				<div class="action">
+					<button class="btn complete add"
+						data-ng-disabled="!a.activity_visibility"
+						data-ng-click="addModule(a,json.id)">
+						<i class="fa fa-plus-circle"></i> <span>Add to my project</span>
+					</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</accordion-group> </accordion> </tab> <tab heading="Menu Builder" active="tabmenuactive"
+		select="currentTab()">
+	<div data-ng-include="'app/views/en-US/user/menu.html'"></div>
+	</tab> <tab heading="Site Template" active="tabsitetemplate"
+		select="currentTab()"> <!-- <div data-ng-include="'app/views/en-US/user/project-template-view.html'"></div> -->
+	<accordion> <accordion-group heading="User Templates"
+		is-open="true" class="user-templates">
+	<div class="templates">
+		<button class="btn complete add"
+			data-ng-click="openModal('create','template','sm');">
+			<i class="fa fa-plus-circle"></i> <span>Add</span>
+		</button>
+		<ul data-ng-if="projectTemplates.length">
+			<li data-ng-repeat="template in projectTemplates">
+				<h3 class="title lead">
+					<i data-ng-class="getDeviceClass(template.device)"></i>&nbsp;{{template.device}}<span
+						data-ng-if="template.device!=null &&template.device!=''">&nbsp;-</span>&nbsp;{{template.name}}
+				</h3>
+				<h4 class="label">{{template.label}}</h4>
+				<p class="description">{{template.description}}</p>
+				<div class="action">
+					<button class="btn success edit"
+						data-ng-click="updateProjectTemplate(template.projectTemplateId, template.device)">
+						<i class="fa fa-pencil-square-o"></i> <span>Edit</span>
+					</button>
+					<button class="btn danger delete"
+						data-ng-click="setDeleteProjectTemplate(template); openModal('delete', 'template', 'sm');">
+						<i class="fa fa-trash-o"></i> <span>Delete</span>
+					</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</accordion-group> </accordion> </tab> </tabset>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>

@@ -1,0 +1,108 @@
+<header class="user" style="width: 2200px;" data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="activity" data-ng-controller="ProjectTemplateCtrl as actCtrl">
+	<h1 class="title">Project Template Designer</h1>
+	<form name="$root.myForm">
+		<div class="info">
+			<h3 class="title">{{projectTemplate.device}}</h3>
+			<div class="general">
+			<!-- | filter : {base_organization : 'INDIVIDUAL' } && {base_organization : organizationOfUser.organization_name} -->
+				<div class="item">
+					<label for="name">Template To Use</label> <select
+						class="form-control" name="templateId"
+						data-ng-model="projectTemplate.templateId"
+						data-ng-change="getTemplateComponents(template)" autofocus="autofocus"
+						data-ng-options="template.templateId as template.label for template in templates | filter : { device: projectTemplate.device } | orderBy:'label' ">
+						<option value="">---Select---</option>
+					</select>
+				</div>
+				<div class="item">
+					<label for="label">Color</label> <input colorpicker="hex"
+						type="text" ng-model="projectTemplate.color" class="form-control"
+						placeholder="Color" name="color" autofocus="autofocus">
+				</div>
+			</div>
+			<div class="action">
+				<button class="btn success" ng-click="updateProjectTemplate()">Update</button>
+				<button class="btn btn-danger" ng-click="deleteProjectTemplate()">Delete</button>
+				<button class="btn btn-info" ng-click="cancelProjectTemplate()">Cancel</button>
+			</div>
+			<br>
+			<accordion close-others="true"> <!-- HEADER SECTION --> <accordion-group
+				heading="Header" class="screens" is-open="true">
+			<div class="item"
+				data-ng-repeat="object in projectTemplate.templateComponents | filter : { templateSection: 'header' }">
+				<label for="label">{{object.label}}</label>
+				<!-- TEXT BOX -->
+				<input class="form-control" ng-if="object.elementType == 'text'"
+					type="{{object.elementType}}"
+					ng-model="object.templateComponentValue" />
+				<!-- FILE UPLOAD -->
+				<input class="form-control" ng-if="object.elementType == 'file'"
+					type="{{object.elementType}}"
+					ng-model="object.templateComponentValue"
+					fileread="object.templateComponentValue" /> <img width="200"
+					height="140" ng-if="object.elementType == 'file'"
+					ng-show="object.templateComponentValue!=null && object.templateComponentValue!=''"
+					data-ng-src="{{object.templateComponentValue}}" />
+				<!-- TEXT RICH EDITOR -->
+				<textarea data-ck-editor ng-if=" object.elementType == 'editor'"
+					ng-model="object.templateComponentValue"></textarea>
+				<br>
+				<br>
+			</div>
+			</accordion-group> <!-- FOOTER SECTION --> <accordion-group heading="Footer"
+				class="screens" is-open="true">
+			<div class="item"
+				data-ng-repeat="object in projectTemplate.templateComponents | filter : { templateSection: 'footer' }">
+				<label for="label">{{object.label}}</label>
+				<!-- TEXT BOX -->
+				<input class="form-control" ng-if="object.elementType == 'text'"
+					type="{{object.elementType}}"
+					ng-model="object.templateComponentValue" />
+				<!-- FILE UPLOAD -->
+				<input class="form-control" ng-if="object.elementType == 'file'"
+					type="{{object.elementType}}"
+					ng-model="object.templateComponentValue"
+					fileread="object.templateComponentValue" /> <img width="200"
+					height="140" ng-if="object.elementType == 'file'"
+					ng-show="object.templateComponentValue!=null && object.templateComponentValue!=''"
+					data-ng-src="{{object.templateComponentValue}}" />
+				<!-- TEXT RICH EDITOR -->
+				<textarea data-ck-editor ng-if=" object.elementType == 'editor'"
+					ng-model="object.templateComponentValue"></textarea>
+				<br>
+				<br>
+			</div>
+			</accordion-group> <!-- ABOUT SECTION --> <accordion-group heading="About"
+				class="screens" is-open="true">
+			<div class="item"
+				data-ng-repeat="object in projectTemplate.templateComponents | filter : { templateSection: 'about' }">
+				<label for="label">{{object.label}}</label>
+				<!-- TEXT BOX -->
+				<input class="form-control" ng-if="object.elementType == 'text'"
+					type="{{object.elementType}}"
+					ng-model="object.templateComponentValue" />
+				<!-- FILE UPLOAD -->
+				<input class="form-control" ng-if="object.elementType == 'file'"
+					type="{{object.elementType}}"
+					ng-model="object.templateComponentValue"
+					fileread="object.templateComponentValue" /> <img width="200"
+					height="140" ng-if="object.elementType == 'file'"
+					ng-show="object.templateComponentValue!=null && object.templateComponentValue!=''"
+					data-ng-src="{{object.templateComponentValue}}" />
+				<!-- TEXT RICH EDITOR -->
+				<textarea data-ck-editor ng-if=" object.elementType == 'editor'"
+					ng-model="object.templateComponentValue"></textarea>
+				<br>
+				<br>
+			</div>
+			</accordion-group> </accordion>
+		</div>
+		<div class="action">
+			<button class="btn success" ng-click="updateProjectTemplate()">Update</button>
+			<button class="btn btn-danger" ng-click="deleteProjectTemplate()">Delete</button>
+			<button class="btn btn-info" ng-click="cancelProjectTemplate()">Cancel</button>
+		</div>
+	</form>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>

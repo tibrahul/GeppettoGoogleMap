@@ -1,0 +1,51 @@
+<div class="project">
+  <div class="modal-header">
+    <h3 class="modal-title lead">Add Group</h3>
+  </div>
+  <div class="modal-body">
+    <form class="create" name="myForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control" placeholder="Enter name" id="name"
+               data-ng-model="modalData.name" data-ng-required="true" 
+               data-ng-maxlength="50">
+      </div>
+       <div class="form-group">
+        <label for="primary_noun">Data Bind The Group To Primary Noun:</label>
+                  <p>{{modalData.primary_Noun_name}}</p>
+        <!-- 
+            <select id="primary_noun" class="form-control"
+                    data-ng-model="modalData.primary_Noun"
+                    data-ng-options="pn.label for pn in allNounProject track by pn.id">
+              <option value="" disabled>Choose an option</option>
+            </select> -->
+      </div>
+      <div class="form-group">
+       <!--  <label for="primary_noun">Attributes:</label>
+           <select id="pn_attribute" class="form-control"
+                          data-ng-model="modalData.pn_attribute"
+                          data-ng-options="attr.label for attr in modalData.nounattributes track by attr.id">
+                    <option value="">None</option>
+           </select> -->
+           
+           <label for="primary_noun">Attributes:</label>
+            <select id="pn_attribute" class="form-control"
+                          data-ng-change="choosePnAttribute()"
+                          data-ng-model="modalData.pn_attribute_id">
+                    <option value="">None</option>
+                    <option data-ng-repeat="attr in modalData.nounattributes track by attr.id"
+                            value="{{attr.id}}"
+                            data-ng-selected="{{attr.id == modalData.pn_attribute.id}}">
+                      {{ (attr.label === 'Label' || attr.label === '') ? attr.name : attr.label }}
+                    </option>
+                  </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn complete"
+            data-ng-click="save()">Create
+    </button>
+    <button class="btn btn-default" data-ng-click="close()">Cancel</button>
+  </div>
+</div>

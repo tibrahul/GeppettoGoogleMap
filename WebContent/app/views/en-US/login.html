@@ -1,0 +1,52 @@
+<!-- modifie by Rashmi, wired the html with angular code -->
+<div class="login">
+    <a href="#/en-US/home/" class="logo">
+        <img src="app/img/lego.svg" alt="Geppetto">
+    </a>
+    <div class="form">
+        <h1 class="title lead">Sign In</h1>
+        <form class="form-horizontal" data-ng-submit="doLogin(loginform,user)" name="loginform"
+                                  novalidate>
+            <span style="color: red;font-style: italic;">{{errormessage}}</span>
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" 
+            data-ng-model="user.email" type="email" name="email" id="mail"
+            data-ng-required="true" data-ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"> <span
+            data-ng-show="loginform.email.$error.pattern" class="error-msg" style="color: red;">
+            Invalid email address!</span> 
+            <span data-ng-show="loginform.email.$dirty && loginform.email.$error.required"
+				class="error-msg" style="color: red;">login is required!</span>
+            
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" data-ng-model="user.pass" 
+            	type="password" name="password" id="psw"
+				data-ng-required="true" min="4" max="16" data-ng-minlength="4"
+				data-ng-maxlength="16"> 
+			<span
+				data-ng-show="loginform.password.$dirty && loginform.password.$error.required"
+				class="error-msg" style="color: red;">Password is required!</span> 
+			<span
+				data-ng-show="loginform.password.$dirty && loginform.password.$error.minlength"
+				class="error-msg" style="color: red;">Password should have minimum of 4
+				characters!</span> 
+			<span
+				data-ng-show="loginform.password.$dirty && loginform.password.$error.maxlength"
+				class="error-msg" style="color: red;">Password should have maximum of 16
+				characters!</span>
+			
+            <label class="form-checkbox" for="new">
+                <input type="checkbox" id="new" data-ng-model = "user.newuser">
+                <span>New user</span>
+            </label>
+            <button type="submit" class="btn btn-default submit">Sign in</button>
+        </form>
+        <div class="social">
+            <a class="facebook" >
+                <i class="fa fa-facebook-square" ng-click="fbLogin()" ></i>
+            </a>
+            <a class="google-plus">
+                <i class="fa fa-google-plus-square" ng-click="gplusLogin()"></i>
+            </a>
+        </div>
+    </div>
+</div>

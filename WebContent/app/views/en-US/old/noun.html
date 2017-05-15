@@ -1,0 +1,464 @@
+<!-- page start  -->
+
+<div class="main" ng-controller="NounController as nounCtrl">
+	<section class="section-bg1">
+
+		<!-- Container start  -->
+		<div class="container">
+			<div class="add-project col-sm-12">
+				<a href="" ng-click="gotoProject()"
+					class="btn btn-primary pull-right"> Goto Project </a>
+			</div>
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#project1"
+					aria-controls="project1" role="tab" data-toggle="tab"> Manage
+						Noun </a></li>
+			</ul>
+
+
+			<!-- Row Start -->
+			<div class="row">
+
+				<div class="col-sm-12">
+					<div role="tabpanel">
+
+						<!-- form start  -->
+						<form role="form" class="" ng-submit="submitNoun()"
+							novalidate="novalidate">
+
+
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="project1">
+
+									<div class="panel-group accordion" id="accordion"
+										role="tablist" aria-multiselectable="true">
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="headingOne">
+												<h4 class="panel-title  accordion-heading">
+													<a data-toggle="collapse" class="accordion-toggle"
+														data-parent="#accordion" href=""
+														ng-click="requiredPanel()" aria-expanded="true"
+														aria-controls="nouns"> Required Information </a>
+												</h4>
+											</div>
+
+											<!-- Nouns Required informations section -->
+											<div id="nouns" class="panel-collapse collapse in"
+												role="tabpanel" aria-labelledby="headingOne">
+												<div class="panel-body" ng-show="panelControl && rpanel">
+
+													<!-- Section 1 start-->
+													<div class="form-horizontal">
+														<div class="row">
+
+															<div class="col-sm-12 col-xs-12 col-md-4">
+																<label class="control-label" for="name"><strong>Name
+																		:</strong></label>
+																<p>
+																	<input type="text" class="form-control"
+																		placeholder="Name" name="name" autofocus="autofocus"
+																		required="required" ng-model="nounvalues.name">
+																</p>
+															</div>
+															<div class="col-sm-12 col-xs-12 col-md-4">
+
+																<label class="control-label" for="description"><strong>Description
+																		:</strong></label>
+																<p>
+																	<input type="text" class="form-control"
+																		placeholder="Description" name="description" required
+																		ng-model="nounvalues.description">
+
+																</p>
+															</div>
+															<div class="col-sm-12 col-xs-12 col-md-4 " ng-if="mode=='create'">
+
+																<label class="control-label " for="copy"><strong>
+																		Copy noun properties from : </strong></label>
+																<p>
+																	<select class="form-control" name="copy"
+																		data-init-plugin="select2"
+																		title="Copp noun properties from"
+																		autofocus="autofocus" required="required"
+																		ng-model="nounData"
+																		style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+																		ng-options="type as type.label for type in allNounProject">
+																		<option value="">---Select---</option>
+																		<!-- <option value="">Private</option> -->
+																	</select>
+																</p>
+															</div>
+														</div>
+													</div>
+													<!-- Section 1 end  -->
+
+													<div class="clearfix">&nbsp;</div>
+
+													<!-- Section 2 start -->
+													<div class="form-horizontal">
+														<div class="row">
+															<div class="col-sm-12 col-xs-12 col-md-12">
+																<h3>Properties</h3>
+															</div>
+
+															<div class="col-xs-12 col-md-12">
+
+																<table class="table table-bordered" id="act-des-tbl">
+																	<thead>
+																		<tr>
+																			<th width="15%">Name</th>
+																			<th width="15%">Label</th>
+																			<th width="15%">Type</th>
+																			<th width="15%">Modifier</th>
+																			<th width="25%">Description</th>
+																			<th width="15%">Unique</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr
+																			ng-repeat="nounAttributes in nounvalues.nounattributes track by $index">
+																			<th scope="row"><editable-data
+																					input-data="nounAttributes.name"></editable-data></th>
+																			<td><editable-data
+																					input-data="nounAttributes.label"></editable-data></td>
+																			<td><select class="full-width hover" name="copy"
+																				ng-model="nounAttributes.subtype"
+																				data-init-plugin="select2"
+																				title="Copp noun properties from"
+																				autofocus="autofocus"
+																				style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+																				ng-options="nounType.label as nounType.label for nounType in nounType"
+																				ng-change="setModifier(nounAttributes)">
+																					<option value="">---Select---</option>
+																			</select></td>
+																			<td>{{nounAttributes.subtypemodifiervalue}}</td>
+																			<td><editable-data
+																					input-data="nounAttributes.description"></editable-data></td>
+																			<td>
+																				<p class="tech-checkbox">
+																					<input id="check{{$index}}" type="checkbox"
+																						name="check"
+																						ng-checked="nounAttributes.ispart_of_unique_key"
+																						ng-model="nounAttributes.ispart_of_unique_key">&nbsp;
+																					<label for="check{{$index}}"></label>
+																				</p>
+																			</td>
+																		</tr>
+																		<tr ng-click="addNewRow()">
+																			<th scope="row">Click to add</th>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																		</tr>
+																	</tbody>
+																</table>
+
+															</div>
+														</div>
+
+													</div>
+													<!-- Section 2 end  -->
+
+													<div class="btm-bdr">&nbsp;</div>
+
+													<!-- Section 3 start -->
+													<div class="row">
+														<div class="col-sm-12 col-xs-12 col-md-6">
+															<h3>Relationships :</h3>
+															<div id="noun-rel">
+																<p class="tech-checkbox">
+																	<input id="isnone" ng-disabled="true" type="checkbox"
+																		name="check" ng-model="isNone" checked="checked">&nbsp;
+																	<label for="isnone">None</label>
+																</p>
+																<div class="col-xs-3 col-md-3" style="padding: 0px;">
+																	<p class="tech-checkbox">
+																		<input id="parentof" value="5" type="checkbox"
+																			name="check" ng-checked="parentOf" ng-disabled="true">&nbsp;
+																		<label for="parentof">Parent Of</label>
+																	</p>
+																</div>
+																<div class="col-xs-3 col-md-8" style="padding: 0px;">
+																	<select class="form-control hover" name="copy"
+																		data-init-plugin="select2"
+																		title="Copp noun properties from"
+																		autofocus="autofocus"
+																		style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+																		ng-model="noun.parents"
+																		ng-options="parent as parent.label for parent in allNounProject">
+																		<option value="">---Select---</option>
+																	</select>
+																</div>
+																<div class="clearfix"></div>
+																<div class="col-xs-3 col-md-3" style="padding: 0px;">
+																	<p class="tech-checkbox">
+																		<input id="childof" type="checkbox" name="check"
+																			ng-checked="childOf" ng-disabled="true" value="6">&nbsp;
+																		<label for="childof">Child Of</label>
+																	</p>
+																</div>
+																<div class="col-xs-3 col-md-8" style="padding: 0px;">
+																	<select class="form-control hover" name="copy"
+																		data-init-plugin="select2"
+																		title="Copp noun properties from"
+																		autofocus="autofocus"
+																		style="border: 1px solid rgba(0, 0, 0, .07); padding: 9px 12px;"
+																		ng-model="noun.children"
+																		ng-options="child as child.label for child in allNounProject">
+																		<option value="">---Select---</option>
+																	</select>
+																</div>
+																<div class="clearfix"></div>
+
+															</div>
+														</div>
+														<div class="col-sm-12 col-xs-12 col-md-6">&nbsp;</div>
+													</div>
+													<div class="btm-bdr">&nbsp;</div>
+													<p class="tech-checkbox">
+														<input id="cacheEnabled" type="checkbox" name="check"
+															ng-model="nounvalues.cacheable">&nbsp; <label
+															for="cacheEnabled">
+															<button class="btn btn-danger">Cache Enabled</button>
+														</label>
+													</p>
+													<!-- Section 3 end -->
+
+												</div>
+											</div>
+											<!-- Noun required information end -->
+
+
+										</div>
+
+										<!-- Documentation Section Starts  -->
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="headingTwo">
+												<h4 class="panel-title accordion-heading">
+													<!-- 
+													<a data-toggle="collapse" class="accordion-toggle"
+														data-parent="#accordion" href=""
+														ng-click="requiredPanel()" aria-expanded="true"
+														aria-controls="nouns"> Required Information </a> -->
+													<a class="collapsed accordion-toggle" href=""
+														ng-click="documentationPanel()" data-toggle="collapse"
+														data-parent="#accordion" aria-expanded="false"
+														aria-controls="Documentation"> Documentation </a>
+												</h4>
+											</div>
+											<div id="Documentation" class="panel-collapse collapse in"
+												role="tabpanel" aria-labelledby="headingTwo">
+												<div class="panel-body" ng-show="!panelControl && dpanel">
+
+													<textarea data-ng-model="nounvalues.notes" data-ck-editor></textarea>
+
+													<!-- Editor Section Starts -->
+													<!-- <div class="rich-text-editor" id="rte">
+														<div class="toolbar ql-toolbar ql-snow" id="_toolbar_rte">
+															<span class="ql-format-group"> <select
+																title="Font" class="ql-font">
+																	<option value="sans-serif" selected="">Sans
+																		Serif</option>
+																	<option value="serif">Serif</option>
+																	<option value="monospace">Monospace</option>
+															</select> <select title="Size" class="ql-size">
+																	<option value="10px">Small</option>
+																	<option value="13px" selected="">Normal</option>
+																	<option value="18px">Large</option>
+																	<option value="32px">Huge</option>
+															</select>
+															</span> <span class="ql-format-group"> <span title="Bold"
+																class="ql-format-button ql-bold"></span> <span
+																class="ql-format-separator"></span> <span title="Italic"
+																class="ql-format-button ql-italic"></span> <span
+																class="ql-format-separator"></span> <span
+																title="Underline" class="ql-format-button ql-underline"></span>
+																<span class="ql-format-separator"></span> <span
+																title="Strikethrough" class="ql-format-button ql-strike"></span>
+															</span> <span class="ql-format-group"> <select
+																title="Text Color" class="ql-color">
+																	<option value="rgb(0, 0, 0)" label="rgb(0, 0, 0)"
+																		selected=""></option>
+																	<option value="rgb(230, 0, 0)" label="rgb(230, 0, 0)"></option>
+																	<option value="rgb(255, 153, 0)"
+																		label="rgb(255, 153, 0)"></option>
+																	<option value="rgb(255, 255, 0)"
+																		label="rgb(255, 255, 0)"></option>
+																	<option value="rgb(0, 138, 0)" label="rgb(0, 138, 0)"></option>
+																	<option value="rgb(0, 102, 204)"
+																		label="rgb(0, 102, 204)"></option>
+																	<option value="rgb(153, 51, 255)"
+																		label="rgb(153, 51, 255)"></option>
+																	<option value="rgb(255, 255, 255)"
+																		label="rgb(255, 255, 255)"></option>
+																	<option value="rgb(250, 204, 204)"
+																		label="rgb(250, 204, 204)"></option>
+																	<option value="rgb(255, 235, 204)"
+																		label="rgb(255, 235, 204)"></option>
+																	<option value="rgb(255, 255, 204)"
+																		label="rgb(255, 255, 204)"></option>
+																	<option value="rgb(204, 232, 204)"
+																		label="rgb(204, 232, 204)"></option>
+																	<option value="rgb(204, 224, 245)"
+																		label="rgb(204, 224, 245)"></option>
+																	<option value="rgb(235, 214, 255)"
+																		label="rgb(235, 214, 255)"></option>
+																	<option value="rgb(187, 187, 187)"
+																		label="rgb(187, 187, 187)"></option>
+																	<option value="rgb(240, 102, 102)"
+																		label="rgb(240, 102, 102)"></option>
+																	<option value="rgb(255, 194, 102)"
+																		label="rgb(255, 194, 102)"></option>
+																	<option value="rgb(255, 255, 102)"
+																		label="rgb(255, 255, 102)"></option>
+																	<option value="rgb(102, 185, 102)"
+																		label="rgb(102, 185, 102)"></option>
+																	<option value="rgb(102, 163, 224)"
+																		label="rgb(102, 163, 224)"></option>
+																	<option value="rgb(194, 133, 255)"
+																		label="rgb(194, 133, 255)"></option>
+																	<option value="rgb(136, 136, 136)"
+																		label="rgb(136, 136, 136)"></option>
+																	<option value="rgb(161, 0, 0)" label="rgb(161, 0, 0)"></option>
+																	<option value="rgb(178, 107, 0)"
+																		label="rgb(178, 107, 0)"></option>
+																	<option value="rgb(178, 178, 0)"
+																		label="rgb(178, 178, 0)"></option>
+																	<option value="rgb(0, 97, 0)" label="rgb(0, 97, 0)"></option>
+																	<option value="rgb(0, 71, 178)" label="rgb(0, 71, 178)"></option>
+																	<option value="rgb(107, 36, 178)"
+																		label="rgb(107, 36, 178)"></option>
+																	<option value="rgb(68, 68, 68)" label="rgb(68, 68, 68)"></option>
+																	<option value="rgb(92, 0, 0)" label="rgb(92, 0, 0)"></option>
+																	<option value="rgb(102, 61, 0)" label="rgb(102, 61, 0)"></option>
+																	<option value="rgb(102, 102, 0)"
+																		label="rgb(102, 102, 0)"></option>
+																	<option value="rgb(0, 55, 0)" label="rgb(0, 55, 0)"></option>
+																	<option value="rgb(0, 41, 102)" label="rgb(0, 41, 102)"></option>
+																	<option value="rgb(61, 20, 102)"
+																		label="rgb(61, 20, 102)"></option>
+															</select> <span class="ql-format-separator"></span> <select
+																title="Background Color" class="ql-background">
+																	<option value="rgb(0, 0, 0)" label="rgb(0, 0, 0)"></option>
+																	<option value="rgb(230, 0, 0)" label="rgb(230, 0, 0)"></option>
+																	<option value="rgb(255, 153, 0)"
+																		label="rgb(255, 153, 0)"></option>
+																	<option value="rgb(255, 255, 0)"
+																		label="rgb(255, 255, 0)"></option>
+																	<option value="rgb(0, 138, 0)" label="rgb(0, 138, 0)"></option>
+																	<option value="rgb(0, 102, 204)"
+																		label="rgb(0, 102, 204)"></option>
+																	<option value="rgb(153, 51, 255)"
+																		label="rgb(153, 51, 255)"></option>
+																	<option value="rgb(255, 255, 255)"
+																		label="rgb(255, 255, 255)" selected=""></option>
+																	<option value="rgb(250, 204, 204)"
+																		label="rgb(250, 204, 204)"></option>
+																	<option value="rgb(255, 235, 204)"
+																		label="rgb(255, 235, 204)"></option>
+																	<option value="rgb(255, 255, 204)"
+																		label="rgb(255, 255, 204)"></option>
+																	<option value="rgb(204, 232, 204)"
+																		label="rgb(204, 232, 204)"></option>
+																	<option value="rgb(204, 224, 245)"
+																		label="rgb(204, 224, 245)"></option>
+																	<option value="rgb(235, 214, 255)"
+																		label="rgb(235, 214, 255)"></option>
+																	<option value="rgb(187, 187, 187)"
+																		label="rgb(187, 187, 187)"></option>
+																	<option value="rgb(240, 102, 102)"
+																		label="rgb(240, 102, 102)"></option>
+																	<option value="rgb(255, 194, 102)"
+																		label="rgb(255, 194, 102)"></option>
+																	<option value="rgb(255, 255, 102)"
+																		label="rgb(255, 255, 102)"></option>
+																	<option value="rgb(102, 185, 102)"
+																		label="rgb(102, 185, 102)"></option>
+																	<option value="rgb(102, 163, 224)"
+																		label="rgb(102, 163, 224)"></option>
+																	<option value="rgb(194, 133, 255)"
+																		label="rgb(194, 133, 255)"></option>
+																	<option value="rgb(136, 136, 136)"
+																		label="rgb(136, 136, 136)"></option>
+																	<option value="rgb(161, 0, 0)" label="rgb(161, 0, 0)"></option>
+																	<option value="rgb(178, 107, 0)"
+																		label="rgb(178, 107, 0)"></option>
+																	<option value="rgb(178, 178, 0)"
+																		label="rgb(178, 178, 0)"></option>
+																	<option value="rgb(0, 97, 0)" label="rgb(0, 97, 0)"></option>
+																	<option value="rgb(0, 71, 178)" label="rgb(0, 71, 178)"></option>
+																	<option value="rgb(107, 36, 178)"
+																		label="rgb(107, 36, 178)"></option>
+																	<option value="rgb(68, 68, 68)" label="rgb(68, 68, 68)"></option>
+																	<option value="rgb(92, 0, 0)" label="rgb(92, 0, 0)"></option>
+																	<option value="rgb(102, 61, 0)" label="rgb(102, 61, 0)"></option>
+																	<option value="rgb(102, 102, 0)"
+																		label="rgb(102, 102, 0)"></option>
+																	<option value="rgb(0, 55, 0)" label="rgb(0, 55, 0)"></option>
+																	<option value="rgb(0, 41, 102)" label="rgb(0, 41, 102)"></option>
+																	<option value="rgb(61, 20, 102)"
+																		label="rgb(61, 20, 102)"></option>
+															</select>
+															</span> <span class="ql-format-group"> <span title="List"
+																class="ql-format-button ql-list"></span> <span
+																class="ql-format-separator"></span> <span title="Bullet"
+																class="ql-format-button ql-bullet"></span> <span
+																class="ql-format-separator"></span> <select
+																title="Text Alignment" class="ql-align">
+																	<option value="left" label="Left" selected=""></option>
+																	<option value="center" label="Center"></option>
+																	<option value="right" label="Right"></option>
+																	<option value="justify" label="Justify"></option>
+															</select>
+															</span> <span class="ql-format-group"> <span title="Link"
+																class="ql-format-button ql-link"></span>
+															</span>
+														</div>
+														<div class="editor ql-container ql-snow" id="_editor_rte"></div>
+													</div> -->
+													<!-- Editor Section Ends -->
+												</div>
+											</div>
+										</div>
+										<!-- Documentation Section Ends  -->
+
+									</div>
+
+									<!-- action buttons -->
+									<div class="action-group  button-group">
+										<span ng-if="mode=='create'">
+											<button class="btn btn-success" type="submit"
+												ng-disabled="!nounvalues.name">Create</button>
+											<button class="btn btn-info" type="reset"
+												ng-click="cancelNoun()">Cancel</button>
+										</span> <span ng-if="mode=='update'">
+											<button class="btn btn-success" type="button"
+												ng-click="updateNoun()" ng-disabled="!nounvalues">Update</button>
+											<button class="btn btn-danger" type="button"
+												ng-disabled="!nounvalues" id="btnStickUpSizeToggler"
+												ng-click="deleteNoun()">Delete</button>
+											<button class="btn btn-info" type="reset"
+												ng-click="cancelNoun()">Cancel</button>
+										</span>
+									</div>
+
+								</div>
+
+							</div>
+
+						</form>
+						<!-- form end  -->
+					</div>
+				</div>
+
+
+			</div>
+			<!-- Row End -->
+
+		</div>
+
+	</section>
+</div>
+<!-- page end -->

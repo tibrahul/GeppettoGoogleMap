@@ -1,0 +1,888 @@
+/* TODO: set new #screen width and height while changing orientation */
+
+.axe {
+  display: flex;
+  flex: 1;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.axe .menu {
+  width: 100px;
+  display: flex;
+  border-right: 1px solid #eee;
+}
+
+.axe .menu ul {
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 20px 0;
+  width: 100px;
+}
+
+.axe .menu ul li {
+  display: flex;
+  padding: 9px;
+}
+
+.axe .menu ul li img {
+  display: flex;
+  cursor: pointer;
+  width: 18px;
+}
+
+.axe.mobile .menu ul li img {
+  align-self: center;
+  width: 18px;
+}
+
+.axe .device {
+  width: 850px;
+  height: 800px;
+  display: flex;
+  margin: 0;
+}
+
+/* New Desktop Design */
+
+.axe.desktop .device {
+  display: flex;
+  height: inherit;
+  margin: 0;
+  width: calc(100% - 100px);
+}
+
+.axe.desktop .device .view {
+  display: flex;
+  height: inherit;
+  width: 100%;
+}
+
+.axe.desktop .accessibility {
+  background: transparent;
+  bottom: 20px;
+  border: none;
+  color: #757575;
+  display: flex;
+  margin: 5px;
+  outline: none;
+  opacity: .3;
+  padding: 0;
+  position: absolute;
+  right: 20px;
+  transition: .3s;
+  z-index: 100000;
+}
+
+.axe.desktop .accessibility:hover {
+  opacity: .8;
+}
+
+.axe.desktop .accessibility:active {
+  opacity: 1;
+}
+
+/* iPad mini */
+
+.axe.tablet.iPad_mini .portrait {
+  background: url('../img/devices/tablet/portrait/iPad-mini.svg') no-repeat center 40px;
+  background-size: 462px 652px;
+}
+
+.axe.tablet.iPad_mini .landscape {
+  background: url('../img/devices/tablet/landscape/iPad-mini.svg') no-repeat center 40px;
+  background-size: 652px 462px;
+}
+
+.axe.tablet.iPad_mini .portrait .view {
+  margin: 110px auto;
+  width: 405px;
+  height: 515px;
+}
+
+.axe.tablet.iPad_mini .landscape .view {
+  width: 515px;
+  height: 405px;
+  margin: 70px auto;
+}
+
+/* Nexus 7 */
+
+.axe.tablet.nexus_7 .portrait {
+  background: url('../img/devices/tablet/portrait/Nexus-7.svg') no-repeat center 40px;
+  background-size: 462px 652px;
+}
+
+.axe.tablet.nexus_7 .landscape {
+  background: url('../img/devices/tablet/landscape/Nexus-7.svg') no-repeat center 40px;
+  background-size: 652px 462px;
+}
+
+.axe.tablet.nexus_7 .portrait .view {
+  margin: 115px auto;
+  width: 315px;
+  height: 505px;
+}
+
+.axe.tablet.nexus_7 .landscape .view {
+  width: 505px;
+  height: 315px;
+  margin: 115px auto;
+}
+
+/* Nexus 10 */
+
+.axe.tablet.nexus_10 .portrait {
+  background: url('../img/devices/tablet/portrait/Nexus-10.svg') no-repeat center 30px;
+  background-size: 900px 750px;
+  width: 900px;
+}
+
+.axe.tablet.nexus_10 .landscape {
+  background: url('../img/devices/tablet/landscape/Nexus-10.svg') no-repeat center 20px;
+  background-size: 800px 600px;
+  width: 950px;
+}
+
+.axe.tablet.nexus_10 .portrait .view {
+  margin: 95px auto;
+  width: 390px;
+  height: 620px;
+}
+
+.axe.tablet.nexus_10 .landscape .view {
+  width: 665px;
+  height: 420px;
+  margin: 110px auto;
+}
+
+/* iPhone 5S */
+
+.axe.mobile.iPhone_5S .portrait {
+  background: url('../img/devices/mobile/portrait/iPhone-5S.svg') no-repeat center 40px;
+  background-size: 500px 700px;
+}
+
+.axe.mobile.iPhone_5S .landscape {
+  background: url('../img/devices/mobile/landscape/iPhone-5S.svg') no-repeat center 0;
+  background-size: 700px 500px;
+}
+
+.axe.mobile.iPhone_5S .portrait .view {
+  margin: 145px auto;
+  width: 320px;
+  height: 495px;
+}
+
+.axe.mobile.iPhone_5S .landscape .view {
+  margin: 100px auto;
+  width: 495px;
+  height: 300px;
+}
+
+/* TODO: fix position to absolute */
+.axe #screen {
+  height: inherit;
+  width: inherit;
+}
+
+/* === Components ==== */
+
+/* label */
+
+.axe label._Gp_element {
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-align-items: center;
+  align-items: center;
+
+  -webkit-justify-content: center;
+  justify-content: center;
+
+  min-height: 35px;
+  min-width: 50px;
+  margin: 0;
+  font-size: 14px;
+  line-height: normal;
+}
+
+/* Boopathi */
+/* link */
+
+.axe a._Gp_element {
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-align-items: center;
+  align-items: center;
+
+  -webkit-justify-content: center;
+  justify-content: center;
+
+  cursor: pointer;
+  min-height: 35px;
+  min-width: 50px;
+  margin: 0;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.axe ._Gp_element.form-link {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  color: #0fbaf3;
+  text-decoration: underline;
+  cursor: pointer;
+  max-width: 100%;
+  font-weight: 700;
+}
+
+/* button */
+
+.axe button._Gp_element {
+  white-space: normal;
+  min-height: 35px;
+}
+
+/* checkbox and radio */
+
+.axe label._Gp_element.form-checkbox,
+.axe label._Gp_element.form-radio {
+  width: 80px;
+}
+
+/* input */
+
+.axe input._Gp_element {
+  min-height: 35px;
+  height: inherit;
+  width: 200px;
+}
+
+/* date */
+
+.axe ._Gp_element.date {
+  width: 220px;
+  height: inherit !important; /* hack */
+}
+
+.axe ._Gp_element.date input {
+  min-height: 35px;
+  height: inherit;
+  padding: 0 12px;
+}
+
+.axe.mobile ._Gp_element.date input {
+  border-color: rgb(221, 221, 221);
+  border-radius: 0;
+}
+
+.axe.mobile ._Gp_element.date span {
+  background: transparent;
+  border-color: rgb(221, 221, 221);
+  border-radius: 0;
+}
+
+/* select */
+
+.axe select._Gp_element {
+  width: 200px;
+  height: 35px;
+}
+
+/* border container */
+
+.axe ._Gp_element.border-container {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 100px;
+  width: 250px;
+}
+
+/* tab */
+
+.axe ._Gp_element.tab {
+  width: 300px;
+  height: 170px;
+}
+
+.axe ._Gp_element.tab .tab-content {
+  height: calc(100% - 42px);
+  background: #fff;
+}
+
+/*  Boopathi */
+
+.axe ._Gp_element.tab .tab-list li {
+  /*  width: 33.33%; */
+  text-align: center;
+}
+
+.axe ._Gp_element.tab .tab-list li a {
+  color: #555;
+  cursor: pointer;
+  margin-right: 0;
+  word-wrap: break-word;
+}
+
+.axe ._Gp_element.tab .tab-list li a::selection {
+  background: transparent;
+}
+
+.axe ._Gp_element.tab .section {
+  height: 100%;
+  display: none;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+
+.axe ._Gp_element.tab .section.active {
+  display: block;
+}
+
+/* quill */
+
+.axe ._Gp_element.rich-text-editor {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 340px;
+}
+
+.axe ._Gp_element.rich-text-editor .toolbar {
+  border-bottom: 1px solid #ccc;
+}
+
+.axe ._Gp_element.rich-text-editor .toolbar .ql-format-group {
+  margin: 3px 0;
+}
+
+.axe ._Gp_element.rich-text-editor .editor {
+  height: calc(100% - 77px);
+  min-height: 120px;
+}
+
+/* accordion */
+
+.axe ._Gp_element.accordion {
+  width: 300px;
+  margin-bottom: 0;
+}
+
+.axe ._Gp_element.accordion .panel {
+  min-height: inherit;
+}
+
+.axe ._Gp_element.accordion .panel.active .section {
+  display: block;
+}
+
+.axe ._Gp_element.accordion .panel .panel-heading a {
+  cursor: pointer;
+}
+
+.axe ._Gp_element.accordion .section {
+  display: none;
+  width: inherit;
+  min-height: 100px;
+  height: calc(100% - 37px);
+  resize: vertical;
+  overflow: auto;
+}
+
+.axe ._Gp_element.accordion .section input {
+  resize: none;
+  overflow: hidden;
+}
+
+/* table */
+
+.axe ._Gp_element.table {
+  background: #fff;
+  height: 140px;
+  margin: 0;
+  width: 300px;
+  word-wrap: break-word;
+}
+
+/* horizontal line */
+
+.axe ._Gp_element.horizontal-line::before {
+  display: block;
+  content: "";
+  width: inherit;
+  height: 1px;
+  position: absolute;
+  top: 17px;
+  background: #ccc;
+}
+
+.axe ._Gp_element.horizontal-line {
+  width: 100px;
+  height: 30px !important;
+  border: none;
+  margin: 0;
+}
+
+/* vertical line */
+
+.axe ._Gp_element.vertical-line::before {
+  display: block;
+  content: "";
+  width: 1px;
+  height: inherit;
+  position: absolute;
+  left: 24px;
+  background: #ccc;
+}
+
+.axe ._Gp_element.vertical-line {
+  height: 100px;
+  width: 30px !important;
+  border: none;
+  margin: 0;
+}
+
+/* panel */
+
+.axe ._Gp_element.panel {
+  margin: 0;
+  width: 300px;
+  height: 150px;
+}
+
+.axe ._Gp_element.panel .panel-heading {
+  word-wrap: break-word;
+}
+
+.axe ._Gp_element.panel .panel-body {
+  height: calc(100% - 38px);
+  padding: 0;
+}
+
+.axe ._Gp_element.panel > .table-bordered {
+  border: 1px solid #ddd;
+}
+
+/* Controls */
+
+.axe .controls {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0 0 0;
+  width: 300px;
+  z-index: 1000;
+}
+
+.axe.desktop .controls {
+  padding: 30px 20px 10px;
+  width: 100%;
+}
+
+.axe .orientation {
+  margin: 10px 0 15px 0;
+}
+
+.axe .orientation .btn.active {
+  display: inline-block;
+}
+
+.axe #screen_info,
+.axe #components,
+.axe #grid-properties,
+.axe #data_bindings,
+.axe #verb_bindings {
+  height: 290px;
+  overflow-y: scroll;
+}
+
+.axe .components table th,
+.axe .data_bindings table th,
+.axe .verb_bindings table th {
+  width: 50%;
+}
+
+.axe .data_bindings table td select,
+.axe .verb_bindings table td select {
+  border: none;
+  padding: 0;
+  height: inherit;
+  line-height: inherit;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.axe .components,
+.axe .data_bindings,
+.axe .verb_bindings {
+  display: none;
+}
+
+.axe .components.active,
+.axe .data_bindings.active,
+.axe .verb_bindings.active {
+  display: block;
+}
+
+.axe .screen_info .copy-screen {
+  border: 1px solid #e5e5e5;
+  margin: 0 0 10px 0;
+  padding: 10px;
+}
+
+.axe .screen_info .copy-screen legend {
+  border: 0;
+  font-size: 16px;
+  margin: 0;
+  padding: 0 10px;
+  width: inherit;
+}
+
+.axe .data_bindings .primary_noun_form,
+.axe .data_bindings .secondary_nouns_form {
+  display: none;
+}
+
+.axe .data_bindings .primary_noun_form.active,
+.axe .data_bindings .secondary_nouns_form.active {
+  display: block;
+}
+
+.axe .data_bindings .primary_noun,
+.axe .data_bindings .secondary_nouns {
+  display: none;
+}
+
+.axe .data_bindings .primary_noun.active,
+.axe .data_bindings .secondary_nouns.active {
+  display: block;
+}
+
+.axe .data_bindings .primary_noun p {
+  margin: 0;
+}
+
+.axe .data_bindings .grid-data {
+  display: none;
+}
+
+.axe .data_bindings .grid-data.active {
+  display: block;
+}
+
+.axe .verb_bindings .add_event {
+  padding: 0;
+}
+
+.axe .verb_bindings .bpmn-diagram {
+  display: none;
+}
+
+.axe .verb_bindings .bpmn-diagram.active {
+  display: block;
+}
+
+.axe .verb_bindings .add_event::before {
+  content: '>_';
+  display: inline-block;
+  padding: 0 3px 0 0;
+}
+
+/* Grid */
+/* Boopathi */
+
+.grid-properties h5,
+.card-properties h5,
+.tab-properties h5,
+.list-properties h5,
+.radio-properties h5,
+.accordion-properties h5 {
+  border-bottom: 1px solid #ccc;
+  display: inline-block;
+  font-size: 130%;
+  margin: 0 0 15px;
+}
+
+.grid-properties .list-box,
+.tab-properties .list-box,
+.list-properties .list-box,
+.radio-properties .list-box,
+.accordion-properties .list-box {
+  border-radius: 0;
+  padding: 0;
+}
+
+.grid-properties .list-box option,
+.tab-properties .list-box option,
+.list-properties .list-box option,
+.radio-properties .list-box option,
+.accordion-properties .list-box option {
+  padding: 8px;
+}
+
+.grid-properties .btn-group,
+.tab-properties .btn-group,
+.card-properties .btn-group,
+.list-properties .btn-group,
+.radio-properties .btn-group,
+.accordion-properties .btn-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0 10px;
+}
+
+.grid-properties .input-group,
+.tab-properties .input-group,
+.card-properties .input-group,
+.list-properties .input-group,
+.radio-properties .input-group,
+.accordion-properties .input-group {
+  display: flex;
+}
+
+.grid-properties .input-group span,
+.tab-properties .input-group span,
+.card-properties .input-group span,
+.list-properties .input-group span,
+.radio-properties .input-group span,
+.accordion-properties .input-group span {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.grid-properties .input-group input,
+.tab-properties .input-group input,
+.card-properties .input-group input,
+.list-properties .input-group input,
+.radio-properties .input-group input,
+.accordion-properties .input-group input {
+  padding: 8px 0;
+}
+
+/* Boopathi */
+/* Image widget */
+
+.axe ._Gp_element.image {
+  margin: 0;
+  border: dotted 1.5px black;
+  height: 124px;
+  width: 124px
+}
+
+.axe .image-default {
+  width: 100%;
+}
+
+/* Map  */
+
+.axe ._Gp_element.map {
+  margin: 0;
+  border: dotted 1.5px black;
+  height: 124px;
+  width: 124px
+}
+
+.axe .map-control {
+  width: 100%;
+}
+
+
+/* Additional data */
+
+.axe .table-data {
+  display: none;
+}
+
+.axe .table-data.visible {
+  display: table-row;
+}
+
+.axe .delete {
+  display: none;
+}
+
+.axe .delete.visible {
+  display: block;
+}
+
+.axe .delete kbd {
+  padding: 4px 2px;
+}
+
+.axe .controls .error-msgs {
+  margin: 0;
+}
+
+/* Resizable */
+
+.resizable {
+  position: absolute;
+  min-width: 50px;
+  min-height: 35px;
+}
+
+.resizable::selection {
+  background-color: transparent;
+}
+
+.resize-handle {
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #888;
+  background-color: #fff;
+  visibility: hidden;
+  border-radius: 1px;
+  /* Boopathi */
+  /* z-index: 9999; */
+  z-index: 1040;
+}
+
+.resizable.selected .resize-handle, .resizable:hover .resize-handle {
+  visibility: visible;
+}
+
+.resizable.selected .resize-handle {
+  border-color: #06c;
+}
+
+.resize-handle-n {
+  top: -5px;
+  left: calc(50% - 5px);
+  cursor: ns-resize;
+}
+
+.resize-handle-ne {
+  top: -5px;
+  right: -5px;
+  cursor: nesw-resize;
+}
+
+.resize-handle-e {
+  top: calc(50% - 5px);
+  right: -5px;
+  cursor: ew-resize;
+}
+
+.resize-handle-se {
+  bottom: -5px;
+  right: -5px;
+  cursor: nwse-resize;
+}
+
+.resize-handle-s {
+  bottom: -5px;
+  left: calc(50% - 5px);
+  cursor: ns-resize;
+}
+
+.resize-handle-sw {
+  bottom: -5px;
+  left: -5px;
+  cursor: nesw-resize;
+}
+
+.resize-handle-w {
+  top: calc(50% - 5px);
+  left: -5px;
+  cursor: ew-resize;
+}
+
+.resize-handle-nw {
+  top: -5px;
+  left: -5px;
+  cursor: nwse-resize;
+}
+
+/* Bootstrap */
+
+.axe input[type="checkbox"],
+.axe input[type="radio"] {
+  margin: 0;
+}
+
+.axe button.btn:focus,
+.axe button.btn:active:focus {
+  outline: none;
+}
+
+.axe input.form-control, .axe input.form-control:focus,
+.axe select.form-control, .axe select.form-control:focus,
+.axe textarea.form-control, .axe textarea.form-control:focus {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.axe input[readonly],
+.axe input[readonly]:focus {
+  border: 0;
+}
+
+.axe .panel-group .panel {
+  min-width: inherit;
+  min-height: inherit;
+}
+
+.axe .panel-group .panel .panel-body {
+  min-height: 0;
+  height: auto;
+  display: none;
+}
+
+.axe .panel-group .panel.active .panel-body {
+  display: block;
+}
+
+.axe .btn-toolbar {
+  margin-left: 0;
+  padding: 5px 0;
+}
+
+.axe .btn-toolbar .btn:first-child {
+  margin-left: 0;
+}
+
+.axe .btn:focus, .axe .btn:active:focus,
+.axe .btn.active:focus, .axe .btn.focus,
+.axe .btn:active.focus, .axe .btn.active.focus {
+  outline: 0;
+}
+
+.axe .ck_editor_hidden {
+  overflow: hidden;
+  visibility: hidden;
+  height: 0;
+}
+
+.create_primary_noun_modal .modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.create_primary_noun_modal .noun_data {
+  display: flex;
+}
+
+.create_primary_noun_modal .noun_data .form-group {
+  margin-right: 20px;
+}
+
+.sizebtn{
+	justify-content: flex-start!important;
+}
+
+.btnIncDes{
+	    margin-left: 10px;
+}

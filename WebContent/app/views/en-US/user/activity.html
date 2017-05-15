@@ -1,0 +1,183 @@
+<header class="user" style="width: 2200px;"
+	data-ng-include="'app/views/en-US/user/header.html'"></header>
+<div class="activity" data-ng-controller="ActivityCtrl as actCtrl">
+	<h1 class="title">Activity Designer</h1>
+
+	<tabset class="tabs"> <tab heading="{{currentProject.name}}">
+	<div class="info">
+		<h3 class="title">General Information</h3>
+		<form class="general" name="$root.myForm">
+			<div class="item">
+				<label for="name">Name</label> <input type="text"
+					class="form-control" placeholder="Activity Name" name="acname"
+					autofocus="autofocus" data-ng-model="activity.name" validator
+					name-before-edit="{{activityData.name}}" name-type="activity"
+					project-id="{{activityData.proj_id}}" data-ng-required="true"
+					data-ng-maxlength="50">
+				<ul class="error-msgs" data-ng-messages="$root.myForm.acname.$error"
+					style="color: red; font-style: italic;">
+					<li data-ng-message="whiteSpaceValidator">Whitespace not
+						allowed!</li>
+					<li data-ng-message="specialCharacterValidator">Special
+						character except underscore,hyphen are not allowed!</li>
+					<li data-ng-message="uniqueNameValidator">Name already taken!</li>
+					<li data-ng-message="startAlphabetValidator">Name should start
+						with an alphabet!</li>
+					<li data-ng-message="restrictedNameValidator">This word is a
+						reserved keyword.Please try another name!</li>
+					<li
+						data-ng-show="$root.myForm.acname.$dirty && $root.myForm.acname.$error.maxlength">
+						Name should have maximum of 50 characters!</li>
+					<li
+						data-ng-show="$root.myForm.acname.$dirty && $root.myForm.acname.$error.required">
+						Name is required!</li>
+				</ul>
+			</div>
+			<div class="item">
+				<label for="label">Label</label> <input type="text"
+					class="form-control" id="label" name="aclabel" placeholder="Label"
+					autofocus="autofocus" data-ng-model="activity.label"
+					data-ng-required="true">
+				<ul class="error-msgs"
+					data-ng-messages="$root.myForm.aclabel.$error"
+					style="color: red; font-style: italic;">
+					<li
+						data-ng-show="$root.myForm.aclabel.$dirty && $root.myForm.aclabel.$error.required">Label
+						is required!</li>
+				</ul>
+			</div>
+			<div class="item">
+				<label for="description">Description</label> <input type="text"
+					class="form-control" placeholder="Description" name="acdescription"
+					autofocus="autofocus" data-ng-model="activity.description">
+			</div>
+		</form>
+		<div class="action">
+			<div class="row">
+				<div class="col-md-6">
+					<button class="btn success" data-ng-click="updateActivity()"
+						data-ng-disabled="$root.myForm.acname.$invalid || $root.myForm.aclabel.$invalid || $root.myForm.acname.$pending">Update
+					</button>
+					<button class="btn btn-danger" data-ng-click="deleteActivity()">Delete</button>
+					<button class="btn btn-info" data-ng-click="cancelActivity()">Cancel</button>
+				</div>
+				<div class="col-md-6">
+					<button class="btn success" style="margin-left: 54%;"
+						data-ng-hide="currentProject.application_type != 2"
+						data-ng-click="launchMicroServiceWizard()">Launch
+						Microservices Wizard</button>
+				</div>
+			</div>
+		</div>
+		<br>
+		<accordion close-others="true"> <accordion-group
+			heading="Nouns" class="nouns" is-open="true">
+		<ul>
+			<li class="primary-noun" style="width: 40%;">
+				<h4 class="title">Primary Noun</h4>
+				<div class="form-group">
+					<label for="primary">Select from existing</label> <select
+						class="form-control" name="primaryverb"
+						data-ng-model="activity.primary_noun"
+						title="Copp noun properties from" autofocus="autofocus"
+						data-ng-options="type as type.name for type in primaryNouns track by type.id">
+						<option value="">---Select---</option>
+					</select>
+				</div>
+			</li>
+			<li class="secondary-noun" style="width: 30%;">
+				<h4 class="title">Secondary Noun</h4>
+				<div class="form-group">
+					<label for="secondary">Select from existing</label>
+
+					<!-- <select
+                    class="form-control" name="secondary_nouns"
+                    data-ng-model="secondary_nouns" title="Copp noun properties from"
+                    autofocus="autofocus"
+                    data-ng-options="type as type.name for type in secondaryNouns | orderBy:'name'">
+                    <option value="">---Select---</option>
+                  </select> -->
+
+
+					<div data-ng-dropdown-multiselect="" options="secondaryNouns"
+						selected-model="activity.secondary_nouns"></div>
+
+				</div>
+			</li>
+			<li style="width: 20%; margin-top: 10px;">
+				<div>
+					<button class="btn complete" data-ng-click="createNoun()">Create
+						Noun</button>
+				</div>
+			</li>
+		</ul>
+		</accordion-group> <accordion-group heading="Verbs" class="verbs">
+		<div data-ng-switch="verbSection.value">
+			<div data-ng-switch-when="activity_verb">
+				<!-- wsdl section -->
+			<h4 class="title">Verbs</h4>
+				
+				<div class="form-group">
+					<table data-ng-repeat="object in verbs">
+						<td><input type="text" class="form-control"
+							readonly="readonly" data-ng-model="object.name" /></td>
+						<td><input type="text" class="form-control"
+							readonly="readonly" data-ng-model="object.label" /></td>
+						<td><input type="text" class="form-control"
+							readonly="readonly" data-ng-model="object.description" /></td>
+					</table>
+				</div>
+			</div>
+			<div data-ng-switch-when="wsdl_custom_verb">
+				<h4 class="title">Custom Verbs</h4>
+					<div class="form-group">
+					<table data-ng-repeat="object in customVerb">
+						<td><input type="text" class="form-control"
+							readonly="readonly" data-ng-model="object.operation" /></td>
+						<td><input type="text" class="form-control"
+							readonly="readonly" data-ng-model="object.operation" /></td>
+						<td><input type="text" class="form-control"
+							readonly="readonly" data-ng-model="object.operation" /></td>
+					</table>
+				</div>
+				
+			</div>
+			<div data-ng-switch-default>its default</div>
+		</div>
+
+
+		</accordion-group> 
+		<accordion-group heading="Screens" class="screens">
+		<ul>
+			<li>
+				<h4 class="title">Desktop Based</h4> <i class="fa fa-desktop"></i>
+				<button class="btn btn-info"
+					data-ng-click="openModal('desktop','lg')">View</button>
+			</li>
+			<li>
+				<h4 class="title">Tablet Based</h4> <i class="fa fa-tablet"></i>
+				<button class="btn btn-info"
+					data-ng-click="openModal('tablet','lg')">View</button>
+			</li>
+			<li>
+				<h4 class="title">Mobile Based</h4> <i class="fa fa-mobile"></i>
+				<button class="btn btn-info"
+					data-ng-click="openModal('mobile','lg')">View</button>
+			</li>
+		</ul>
+		</accordion-group> <!--   <accordion-group heading="Extensions" class="extensions">
+            <p>TBD</p>
+          </accordion-group> --> <accordion-group
+			heading="Documentation" class="docs"> <textarea
+			data-ck-editor data-ng-model="activity.notes"></textarea> </accordion-group> </accordion>
+	</div>
+	<div class="action">
+		<button class="btn success" data-ng-click="updateActivity()"
+			data-ng-disabled="$root.myForm.acname.$invalid || $root.myForm.aclabel.$invalid || $root.myForm.acname.$pending">
+			Update</button>
+		<button class="btn btn-danger" data-ng-click="deleteActivity()">Delete</button>
+		<button class="btn btn-info" data-ng-click="cancelActivity()">Cancel</button>
+	</div>
+	</tab> </tabset>
+</div>
+<footer data-ng-include="'app/views/en-US/footer.html'"></footer>
