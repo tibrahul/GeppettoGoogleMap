@@ -1820,7 +1820,7 @@ function showMobileLevel($scope, $compile, id, parent, type, width, height, offs
 		//location = find(id, nodeTree['screen']['children'])['map-input'];
 		html = '<div class="resizable" id="' + id + '"> \
 		<div data-role="map" class="_Gp_element map" id="' + (Number(id) - 1) + '">\
-		<img src="' + find(id, nodeTree['screen']['children'])['map-image'] + '" class="map-image-default">\
+		<img src="app/img/icons/ionic/icon-map.svg" class="map-image-default">\
 		</div>\
 		</div>';
 		$('#' + parent).append(html);
